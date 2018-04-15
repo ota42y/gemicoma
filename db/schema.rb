@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_04_15_092728) do
 
-  create_table "github_repositories", force: :cascade do |t|
+  create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(version: 2018_04_15_092728) do
     t.index ["name"], name: "index_github_repositories_on_name", unique: true
   end
 
-  create_table "github_repository_ruby_gems", force: :cascade do |t|
+  create_table "github_repository_ruby_gems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "gemfile_path", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
