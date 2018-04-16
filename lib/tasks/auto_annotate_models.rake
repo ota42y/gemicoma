@@ -40,12 +40,12 @@ if Rails.env.development?
       'format_bare'               => 'true',
       'format_rdoc'               => 'false',
       'format_markdown'           => 'false',
-      'sort'                      => 'true',
+      'sort'                      => 'false',
       'force'                     => 'false',
       'trace'                     => 'false',
       'wrapper_open'              => nil,
       'wrapper_close'             => nil,
-      'with_comment'              => true
+      'with_comment'              => true,
     )
   end
 

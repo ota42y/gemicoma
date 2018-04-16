@@ -2,10 +2,10 @@
 #
 # Table name: github_repositories
 #
-#  created_at :datetime         not null
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  name       :string(255)      not null
 #  public     :boolean          default(FALSE), not null
+#  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 # Indexes
