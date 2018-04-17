@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2018_04_15_092728) do
     t.index ["name"], name: "index_github_repositories_on_name", unique: true
   end
 
-  create_table "github_repository_ruby_gems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "github_repository_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "gemfile_path", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: github_repository_ruby_gems
+# Table name: github_repository_rubygems
 #
 #  id           :bigint(8)        not null, primary key
 #  gemfile_path :string(255)      not null
@@ -8,5 +8,5 @@
 #  updated_at   :datetime         not null
 #
 
-class Github::Repository::RubyGem < ApplicationRecord
+class Github::Repository::Rubygem < ApplicationRecord
 end
