@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_004444) do
+ActiveRecord::Schema.define(version: 2018_04_21_094558) do
+
+  create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_dump_rubygems_rubygems_on_name"
+  end
+
+  create_table "dump_rubygems_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "dump_rubygems_rubygem_id", null: false
+    t.string "number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dump_rubygems_rubygem_id"], name: "index_dump_rubygems_versions_on_dump_rubygems_rubygem_id"
+  end
 
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -32,4 +48,5 @@ ActiveRecord::Schema.define(version: 2018_04_18_004444) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
 end
