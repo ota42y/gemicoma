@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Github::Repository::RubyGemTest < ActiveSupport::TestCase
+class Github::Repository::BundleFileTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_15_092728) do
+ActiveRecord::Schema.define(version: 2018_04_18_004444) do
 
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 2018_04_15_092728) do
     t.index ["name"], name: "index_github_repositories_on_name", unique: true
   end
 
-  create_table "github_repository_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "gemfile_path", null: false
+  create_table "github_repository_bundle_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "kind", null: false
+    t.string "filepath", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
