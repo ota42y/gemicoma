@@ -14,4 +14,8 @@
 #
 
 class Dump::Rubygems::Rubygem < ApplicationRecord
+  has_many :dump_rubygems_versions,
+           class_name: 'Dump::Rubygems::Version',
+           inverse_of: :dump_rubygems_rubygem,
+           dependent: :destroy
 end

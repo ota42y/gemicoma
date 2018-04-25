@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 2018_04_21_094558) do
   create_table "dump_rubygems_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "dump_rubygems_rubygem_id", null: false
     t.string "number", null: false
+    t.string "platform", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dump_rubygems_rubygem_id"], name: "index_dump_rubygems_versions_on_dump_rubygems_rubygem_id"
+    t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
