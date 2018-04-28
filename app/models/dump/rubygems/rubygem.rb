@@ -17,5 +17,6 @@ class Dump::Rubygems::Rubygem < ApplicationRecord
   has_many :dump_rubygems_versions,
            class_name: 'Dump::Rubygems::Version',
            inverse_of: :dump_rubygems_rubygem,
+           foreign_key: :dump_rubygems_rubygem_id,
            dependent: :destroy
 end
