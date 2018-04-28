@@ -29,23 +29,6 @@ ActiveRecord::Schema.define(version: 2018_04_28_160346) do
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
-  create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "public", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_github_repositories_on_name", unique: true
-  end
-
-  create_table "github_repository_bundle_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "repository_id", null: false
-    t.integer "file_type", null: false
-    t.string "filepath", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["repository_id", "file_type"], name: "repository_file_type_unique", unique: true
-  end
-
   create_table "github_user_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "github_user_id", null: false
     t.string "repository", null: false
@@ -67,6 +50,5 @@ ActiveRecord::Schema.define(version: 2018_04_28_160346) do
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
-  add_foreign_key "github_repository_bundle_files", "github_repositories", column: "repository_id"
   add_foreign_key "github_user_repositories", "github_users"
 end

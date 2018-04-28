@@ -29,12 +29,12 @@ class V1::DependencyGraph
     end
 
     def create_gem_version_info(spec, gem)
-      return GemVersionInfo.create_unknown(spec) unless gem
+      return ::V1::GemVersionInfo.create_unknown(spec) unless gem
       platform_versions = gem.dump_rubygems_versions.select { |v| v.platform == spec.platform }
 
       newest_version = platform_versions.map { |v| ::Gem::Version.create(v.number) }.sort.last
-      return GemVersionInfo.create_unknown(spec) unless newest_version
+      return ::V1::GemVersionInfo.create_unknown(spec) unless newest_version
 
-      GemVersionInfo.new(spec, newest_version.to_s)
+      ::V1::GemVersionInfo.new(spec, newest_version.to_s)
     end
 end
