@@ -19,4 +19,10 @@
 
 class Github::Repository < ApplicationRecord
   belongs_to :github_user, class_name: 'Github::User', inverse_of: :github_repositories
+
+  has_many :github_bundle_files,
+           class_name: 'Github::BundleFile',
+           dependent: :destroy,
+           inverse_of: :github_repository,
+           foreign_key: :github_repository_id
 end

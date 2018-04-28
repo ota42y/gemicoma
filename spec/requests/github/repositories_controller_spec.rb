@@ -21,9 +21,9 @@ describe Github::RepositoriesController, type: :request do
         user = Github::User.find_by!(name: github_user)
         github_repository = user.github_repositories.find_by!(repository: repository)
 
-        # bundle_file = github_repository.bundle_files.first
-        # expect(bundle_file.file_type).to eq 'rubygem'
-        # expect(bundle_file.filepath).to eq './'
+        bundle_file = github_repository.github_bundle_files.first
+        expect(bundle_file.file_type).to eq 'rubygem'
+        expect(bundle_file.filepath).to eq './'
       end
     end
   end

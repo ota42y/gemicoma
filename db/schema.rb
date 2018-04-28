@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_28_170036) do
+ActiveRecord::Schema.define(version: 2018_04_28_170417) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 2018_04_28_170036) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
+  end
+
+  create_table "github_bundle_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "github_repository_id", null: false
+    t.integer "file_type", null: false
+    t.string "filepath", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["github_repository_id", "file_type"], name: "repository_file_type_unique", unique: true
   end
 
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -50,5 +59,6 @@ ActiveRecord::Schema.define(version: 2018_04_28_170036) do
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
+  add_foreign_key "github_bundle_files", "github_repositories"
   add_foreign_key "github_repositories", "github_users"
 end
