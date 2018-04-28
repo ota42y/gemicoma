@@ -1,6 +1,6 @@
-class CreateGithubUserRepositories < ActiveRecord::Migration[5.2]
+class CreateGithubRepositories < ActiveRecord::Migration[5.2]
   def change
-    create_table :github_user_repositories do |t|
+    create_table :github_repositories do |t|
       t.references :github_user, null: false, foreign_key: true, index: false
       t.string :repository, null: false
 

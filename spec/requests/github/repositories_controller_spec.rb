@@ -19,7 +19,11 @@ describe Github::RepositoriesController, type: :request do
         expect(response.status).to eq 302
 
         user = Github::User.find_by!(name: github_user)
-        user.github_user_repositories.find_by!(repository: repository)
+        github_repository = user.github_repositories.find_by!(repository: repository)
+
+        # bundle_file = github_repository.bundle_files.first
+        # expect(bundle_file.file_type).to eq 'rubygem'
+        # expect(bundle_file.filepath).to eq './'
       end
     end
   end

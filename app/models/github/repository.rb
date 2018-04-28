@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: github_user_repositories
+# Table name: github_repositories
 #
 #  id             :bigint(8)        not null, primary key
 #  github_user_id :bigint(8)        not null
@@ -17,6 +17,6 @@
 #  fk_rails_...  (github_user_id => github_users.id)
 #
 
-class Github::User::Repository < ApplicationRecord
-  belongs_to :github_user, class_name: 'Github::User', inverse_of: :github_user_repositories
+class Github::Repository < ApplicationRecord
+  belongs_to :github_user, class_name: 'Github::User', inverse_of: :github_repositories
 end

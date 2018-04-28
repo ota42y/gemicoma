@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_28_160346) do
+ActiveRecord::Schema.define(version: 2018_04_28_170036) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_04_28_160346) do
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
-  create_table "github_user_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "github_user_id", null: false
     t.string "repository", null: false
     t.datetime "created_at", null: false
@@ -50,5 +50,5 @@ ActiveRecord::Schema.define(version: 2018_04_28_160346) do
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
-  add_foreign_key "github_user_repositories", "github_users"
+  add_foreign_key "github_repositories", "github_users"
 end
