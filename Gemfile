@@ -61,8 +61,8 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'activerecord-import'
 gem 'annotate', path: '../annotate_models'
 gem 'fincop'
 gem 'pg'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'activerecord-import'
