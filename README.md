@@ -21,4 +21,14 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+# import rubygems dump
+
+## install postgres container and clone rubygems docker
+
+```bash
+docker-compose up
+
+docker-compose run rubygems /scripts/import_ruygem_data
+./bin/rails runner scripts/import_script.rb
+
+```
