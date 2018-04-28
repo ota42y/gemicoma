@@ -1,3 +1,5 @@
+#!/bin/bash
+
 pushd /rubygems.org
 
 bundle install --path /vender/bundle
