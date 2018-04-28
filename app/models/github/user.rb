@@ -13,4 +13,9 @@
 #
 
 class Github::User < ApplicationRecord
+  has_many :github_user_repositories,
+           class_name: 'Github::User::Repository',
+           dependent: :destroy,
+           foreign_key: :github_user_id,
+           inverse_of: :github_user
 end

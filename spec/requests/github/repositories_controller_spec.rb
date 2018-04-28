@@ -18,7 +18,8 @@ describe Github::RepositoriesController, type: :request do
         expect(subject).to redirect_to('/github/users/ota42y/repositories/test')
         expect(response.status).to eq 302
 
-        Github::User.find_by!(name: github_user)
+        user = Github::User.find_by!(name: github_user)
+        user.github_user_repositories.find_by!(repository: repository)
       end
     end
   end

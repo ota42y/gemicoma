@@ -18,4 +18,5 @@
 #
 
 class Github::User::Repository < ApplicationRecord
+  belongs_to :github_user, class_name: 'Github::User', inverse_of: :github_user_repositories
 end
