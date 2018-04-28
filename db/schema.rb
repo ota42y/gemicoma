@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_094558) do
+ActiveRecord::Schema.define(version: 2018_04_28_160346) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,10 +38,27 @@ ActiveRecord::Schema.define(version: 2018_04_21_094558) do
   end
 
   create_table "github_repository_bundle_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "kind", null: false
+    t.bigint "repository_id", null: false
+    t.integer "file_type", null: false
     t.string "filepath", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["repository_id", "file_type"], name: "repository_file_type_unique", unique: true
+  end
+
+  create_table "github_user_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "github_user_id", null: false
+    t.string "repository", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["github_user_id", "repository"], name: "user_id_repository_unique", unique: true
+  end
+
+  create_table "github_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_github_users_on_name", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -50,4 +67,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_094558) do
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
+  add_foreign_key "github_repository_bundle_files", "github_repositories", column: "repository_id"
+  add_foreign_key "github_user_repositories", "github_users"
 end
