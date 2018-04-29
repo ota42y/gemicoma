@@ -1,4 +1,8 @@
 class Github::RepositoriesController < ApplicationController
+  def new
+    render :new
+  end
+
   def create
     # TODO: check github user and repository access right
     user = ::Github::User.find_or_create_by!(name: params[:user])
@@ -14,12 +18,12 @@ class Github::RepositoriesController < ApplicationController
   private
 
     def add_bundle_files(repository)
-      params[:bundle_files].each do |bundle_file|
-        next unless bundle_file[:file_type].to_sym == :rubygem
-        b = repository.github_ruby_gemfile_info
-        b ||= repository.build_github_ruby_gemfile_info
-        b.filepath = bundle_file['filepath']
-      end
+      rubygem = params[:bundle_files][:rubygem]
+      return unless rubygem
+
+      b = repository.github_ruby_gemfile_info
+      b ||= repository.build_github_ruby_gemfile_info
+      b.filepath = rubygem['filepath']
     end
 
     def add_commit_hash(repository)

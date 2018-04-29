@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 describe Github::RepositoriesController, type: :request do
+  describe '#new' do
+    subject { get url }
+
+    let(:url) { '/github/repositories/new' }
+
+    it do
+      subject
+
+      expect(response.status).to eq 200
+    end
+  end
+
   describe '#create' do
     subject { post url, params: params }
 
@@ -18,7 +30,7 @@ describe Github::RepositoriesController, type: :request do
         }
       end
 
-      let(:bundle_files) { [{ file_type: :rubygem, filepath: './' }] }
+      let(:bundle_files) { { rubygem: { filepath: './' } } }
       let(:github_user) { 'ota42y' }
       let(:repository) { 'test' }
       let(:commit_hash) { SecureRandom.hex(40) }

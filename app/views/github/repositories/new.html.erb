@@ -1,0 +1,14 @@
+<%= form_with url: github_repositories_path do |form| %>
+    <%= form.text_field :user %>
+    <%= form.text_field :repository %>
+    <%= form.text_field :commit_hash %>
+
+    <%= form.fields(:bundle_files) do |fields| %>
+        <%= fields.fields(:rubygem) do |rubygem| %>
+            <%= rubygem.text_field :filepath, value: './' %>
+        <% end %>
+    <% end %>
+
+    <%= form.submit %>
+<% end %>
+
