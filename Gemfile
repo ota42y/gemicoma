@@ -67,4 +67,6 @@ gem 'activerecord-import'
 gem 'annotate', path: '../annotate_models'
 gem 'fincop'
 gem 'pg'
+gem 'redis-namespace'
+gem 'sidekiq'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -36,7 +36,8 @@ describe Github::RepositoriesController, type: :request do
       let(:commit_hash) { SecureRandom.hex(40) }
 
       it do
-        expect(subject).to redirect_to('/github/users/ota42y/repositories/test')
+        expect { subject }.to enqueue_job(::CheckNewRevisionJob)
+
         expect(response.status).to eq 302
 
         user = Github::User.find_by!(name: github_user)
@@ -48,6 +49,10 @@ describe Github::RepositoriesController, type: :request do
         revision = github_repository.github_revisions.first
         expect(revision.commit_hash).to eq commit_hash
         expect(revision.status).to eq 'initialized'
+      end
+
+      it 'check redirect' do
+        expect(subject).to redirect_to('/github/users/ota42y/repositories/test')
       end
     end
   end
