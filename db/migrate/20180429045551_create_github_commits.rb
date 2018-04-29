@@ -1,6 +1,6 @@
-class CreateGithubRevisions < ActiveRecord::Migration[5.2]
+class CreateGithubCommits < ActiveRecord::Migration[5.2]
   def change
-    create_table :github_revisions do |t|
+    create_table :github_commits do |t|
       t.references :github_repository, null: false, foreign_key: true, index: false
 
       t.string :commit_hash, null: false

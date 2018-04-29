@@ -8,11 +8,11 @@ class Github::RepositoriesController < ApplicationController
     user = ::Github::User.find_or_create_by!(name: params[:user])
     repository = user.github_repositories.find_or_initialize_by(repository: params[:repository])
     add_bundle_files(repository)
-    revision = add_commit_hash(repository)
+    commit = add_commit_hash(repository)
 
     user.save!
 
-    ::CheckNewRevisionJob.perform_later(revision.id, true)
+    ::CheckNewCommitJob.perform_later(commit.id, true)
 
     redirect_to "/github/users/#{user.name}/repositories/#{repository.repository}"
   end
@@ -29,8 +29,8 @@ class Github::RepositoriesController < ApplicationController
     end
 
     def add_commit_hash(repository)
-      revision = repository.github_revisions.find_or_initialize_by(commit_hash: params[:commit_hash])
-      revision.status = :initialized
-      revision
+      commit = repository.github_commits.find_or_initialize_by(commit_hash: params[:commit_hash])
+      commit.status = :initialized
+      commit
     end
 end

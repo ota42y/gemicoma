@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: github_revisions
+# Table name: github_commits
 #
 #  id                   :bigint(8)        not null, primary key
 #  github_repository_id :bigint(8)        not null
@@ -11,16 +11,16 @@
 #
 # Indexes
 #
-#  index_github_revisions_on_github_repository_id_and_commit_hash  (github_repository_id,commit_hash) UNIQUE
-#  index_github_revisions_on_status                                (status)
+#  index_github_commits_on_github_repository_id_and_commit_hash  (github_repository_id,commit_hash) UNIQUE
+#  index_github_commits_on_status                                (status)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (github_repository_id => github_repositories.id)
 #
 
-class Github::Revision < ApplicationRecord
-  belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_revisions
+class Github::Commit < ApplicationRecord
+  belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_commits
 
   enum status: { initialized: 0 }
 end

@@ -1,7 +1,7 @@
-class CheckNewRevisionJob < ApplicationJob
+class CheckNewCommitJob < ApplicationJob
   queue_as :default
 
-  def perform(revision_id, need_sleep)
+  def perform(commit_id, need_sleep)
     sleep 1 if need_sleep
 
     # TODO: update revision

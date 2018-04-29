@@ -36,7 +36,7 @@ describe Github::RepositoriesController, type: :request do
       let(:commit_hash) { SecureRandom.hex(40) }
 
       it do
-        expect { subject }.to enqueue_job(::CheckNewRevisionJob)
+        expect { subject }.to enqueue_job(::CheckNewCommitJob)
 
         expect(response.status).to eq 302
 
@@ -46,9 +46,9 @@ describe Github::RepositoriesController, type: :request do
         gemfile_info = github_repository.github_ruby_gemfile_info
         expect(gemfile_info.filepath).to eq './'
 
-        revision = github_repository.github_revisions.first
-        expect(revision.commit_hash).to eq commit_hash
-        expect(revision.status).to eq 'initialized'
+        commits = github_repository.github_commits.first
+        expect(commits.commit_hash).to eq commit_hash
+        expect(commits.status).to eq 'initialized'
       end
 
       it 'check redirect' do
