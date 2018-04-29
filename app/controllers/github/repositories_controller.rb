@@ -5,8 +5,9 @@ class Github::RepositoriesController < ApplicationController
     repository = user.github_repositories.find_or_initialize_by(repository: params[:repository])
 
     params[:bundle_files].each do |bundle_file|
-      b = repository.github_bundle_files.find { |bundle| bundle.file_type == bundle_file[:file_type] }
-      b ||= repository.github_bundle_files.build(file_type: bundle_file[:file_type])
+      next unless bundle_file[:file_type].to_sym == :rubygem
+      b = repository.github_ruby_gemfile_info
+      b ||= repository.build_github_ruby_gemfile_info
       b.filepath = bundle_file['filepath']
     end
 
