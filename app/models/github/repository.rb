@@ -20,10 +20,10 @@
 class Github::Repository < ApplicationRecord
   belongs_to :github_user, class_name: 'Github::User', inverse_of: :github_repositories
 
-  has_one :github_ruby_gemfile_info, class_name: 'Github::Ruby::GemfileInfo',
-                                     dependent: :destroy,
-                                     inverse_of: :github_repository,
-                                     foreign_key: :github_repository_id
+  has_one :github_ruby_gem_info, class_name: 'Github::Ruby::GemInfo',
+                                 dependent: :destroy,
+                                 inverse_of: :github_repository,
+                                 foreign_key: :github_repository_id
 
   has_many :github_commits, class_name: 'Github::Commit',
                             dependent: :destroy,

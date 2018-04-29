@@ -17,6 +17,6 @@
 #  fk_rails_...  (github_repository_id => github_repositories.id)
 #
 
-class Github::Ruby::GemfileInfo < ApplicationRecord
-  belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_ruby_gemfile_info
+class Github::Ruby::GemInfo < ApplicationRecord
+  belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_ruby_gem_info
 end

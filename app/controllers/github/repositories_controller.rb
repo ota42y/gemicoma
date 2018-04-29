@@ -23,9 +23,9 @@ class Github::RepositoriesController < ApplicationController
       rubygem = params[:bundle_files][:rubygem]
       return unless rubygem
 
-      b = repository.github_ruby_gemfile_info
-      b ||= repository.build_github_ruby_gemfile_info
-      b.filepath = rubygem['filepath']
+      b = repository.github_ruby_gem_info
+      b ||= repository.build_github_ruby_gem_info
+      b.gemfile_path = rubygem['gemfile_path']
     end
 
     def add_commit_hash(repository)

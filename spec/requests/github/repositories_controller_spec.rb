@@ -30,7 +30,7 @@ describe Github::RepositoriesController, type: :request do
         }
       end
 
-      let(:bundle_files) { { rubygem: { filepath: './' } } }
+      let(:bundle_files) { { rubygem: { gemfile_path: './' } } }
       let(:github_user) { 'ota42y' }
       let(:repository) { 'test' }
       let(:commit_hash) { SecureRandom.hex(40) }
@@ -43,8 +43,8 @@ describe Github::RepositoriesController, type: :request do
         user = Github::User.find_by!(name: github_user)
         github_repository = user.github_repositories.find_by!(repository: repository)
 
-        gemfile_info = github_repository.github_ruby_gemfile_info
-        expect(gemfile_info.filepath).to eq './'
+        gem_info = github_repository.github_ruby_gem_info
+        expect(gem_info.gemfile_path).to eq './'
 
         commits = github_repository.github_commits.first
         expect(commits.commit_hash).to eq commit_hash

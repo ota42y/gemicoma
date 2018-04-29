@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(version: 2018_04_29_045551) do
     t.index ["github_user_id", "repository"], name: "user_id_repository_unique", unique: true
   end
 
-  create_table "github_ruby_gemfile_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "github_ruby_gem_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "github_repository_id", null: false
-    t.string "filepath", null: false
+    t.string "gemfile_path", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["github_repository_id"], name: "index_github_ruby_gemfile_infos_on_github_repository_id", unique: true
+    t.index ["github_repository_id"], name: "index_github_ruby_gem_infos_on_github_repository_id", unique: true
   end
 
   create_table "github_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,5 +70,5 @@ ActiveRecord::Schema.define(version: 2018_04_29_045551) do
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
   add_foreign_key "github_commits", "github_repositories"
   add_foreign_key "github_repositories", "github_users"
-  add_foreign_key "github_ruby_gemfile_infos", "github_repositories"
+  add_foreign_key "github_ruby_gem_infos", "github_repositories"
 end
