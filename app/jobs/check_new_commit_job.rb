@@ -4,6 +4,9 @@ class CheckNewCommitJob < ApplicationJob
   def perform(commit_id, need_sleep)
     sleep 1 if need_sleep
 
-    # TODO: update revision
+    commit = ::Github::Commit.find_by(id: commit_id)
+    return false unless commit
+
+    commit.check_update
   end
 end

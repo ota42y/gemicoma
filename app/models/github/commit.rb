@@ -23,4 +23,8 @@ class Github::Commit < ApplicationRecord
   belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_commits
 
   enum status: { initialized: 0 }
+
+  def check_update
+    true
+  end
 end

@@ -21,5 +21,9 @@
 
 FactoryBot.define do
   factory :github_commit, class: 'Github::Commit' do
+    github_repository
+
+    commit_hash { SecureRandom.hex(40) }
+    status :initialized
   end
 end

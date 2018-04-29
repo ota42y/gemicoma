@@ -19,5 +19,8 @@
 
 FactoryBot.define do
   factory :github_repository, class: 'Github::Repository' do
+    github_user
+
+    sequence(:repository, &:to_s)
   end
 end
