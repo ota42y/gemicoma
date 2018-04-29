@@ -16,10 +16,14 @@ describe CheckNewCommitJob, type: :model do
       let(:github_commit) { create(:github_commit) }
       let(:commit_id) { github_commit.id }
 
-      before { github_commit }
+      before do
+        github_commit
+        allow(AnalyzeCommitService).to receive(:execute).and_return(true)
+      end
 
       it do
         expect(subject).to eq true
+        expect(AnalyzeCommitService).to have_received(:execute).once
       end
     end
   end
