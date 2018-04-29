@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :repositories, only: [:create]
 
     resources :users, only: [] do
-      resources :repositories, only: [:show]
+      scope module: :users do
+        resources :repositories, only: [:show]
+      end
     end
   end
 end
