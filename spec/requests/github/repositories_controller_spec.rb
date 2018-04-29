@@ -8,11 +8,20 @@ describe Github::RepositoriesController, type: :request do
     let(:params) { {} }
 
     context 'when correct params' do
-      let(:params) { { user: github_user, repository: repository, public: true, bundle_files: bundle_files } }
+      let(:params) do
+        {
+          user: github_user,
+          repository: repository,
+          public: true,
+          bundle_files: bundle_files,
+          commit_hash: commit_hash,
+        }
+      end
 
       let(:bundle_files) { [{ file_type: :rubygem, filepath: './' }] }
       let(:github_user) { 'ota42y' }
       let(:repository) { 'test' }
+      let(:commit_hash) { SecureRandom.hex(40) }
 
       it do
         expect(subject).to redirect_to('/github/users/ota42y/repositories/test')
@@ -23,6 +32,10 @@ describe Github::RepositoriesController, type: :request do
 
         gemfile_info = github_repository.github_ruby_gemfile_info
         expect(gemfile_info.filepath).to eq './'
+
+        revision = github_repository.github_revisions.first
+        expect(revision.commit_hash).to eq commit_hash
+        expect(revision.status).to eq 'initialized'
       end
     end
   end

@@ -24,4 +24,9 @@ class Github::Repository < ApplicationRecord
                                      dependent: :destroy,
                                      inverse_of: :github_repository,
                                      foreign_key: :github_repository_id
+
+  has_many :github_revisions, class_name: 'Github::Revision',
+                              dependent: :destroy,
+                              inverse_of: :github_repository,
+                              foreign_key: :github_repository_id
 end
