@@ -1,19 +1,17 @@
 module V1
   module Github
     class GemData
+      attr_reader :commit, :gemfile_lock
+
       # @param [Github::Commit] commit
       def initialize(commit)
         @commit = commit
       end
 
       def build!
-        gemfile_lock
+        @gemfile_lock ||= ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
 
         true
-      end
-
-      def gemfile_lock
-        @gemfile_lock = ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
       end
 
       private

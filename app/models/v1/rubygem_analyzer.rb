@@ -1,7 +1,7 @@
 class V1::RubygemAnalyzer
-  # @param [Github::Commit] commit
-  def initialize(commit)
-    @commit = commit
+  # @param [V1::Dependency::GemLock] gem_lock
+  def initialize(gem_lock)
+    @gem_lock = gem_lock
   end
 
   def save!
