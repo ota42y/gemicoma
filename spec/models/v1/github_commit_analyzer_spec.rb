@@ -13,6 +13,7 @@ describe V1::GithubCommitAnalyzer, type: :model do
 
       it do
         data = instance_double(V1::Github::GemData)
+        allow(data).to receive(:build!)
         allow(V1::Github::GemData).to receive(:new).and_return(data)
 
         d = instance_double(V1::RubygemAnalyzer)
@@ -21,8 +22,7 @@ describe V1::GithubCommitAnalyzer, type: :model do
 
         expect(subject).to eq true
 
-        expect(V1::Github::GemData).to have_received(:new).once
-
+        expect(data).to have_received(:build!).once
         expect(d).to have_received(:save!).once
         expect(commit.done?).to eq true
       end

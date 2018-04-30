@@ -17,6 +17,7 @@ module V1
         # @param [Github::Commit] commit
         def analyze_rubygem(commit)
           gem_data = ::V1::Github::GemData.new(commit)
+          gem_data.build!
           ::V1::RubygemAnalyzer.new(gem_data).save!
         end
     end
