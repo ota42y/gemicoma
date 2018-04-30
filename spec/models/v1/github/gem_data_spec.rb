@@ -24,7 +24,7 @@ describe V1::Github::GemData, type: :model do
         gemfile_lock = subject.gemfile_lock
         gem = gemfile_lock.specifications.select { |n| n.name == 'ota42y_rubygems_hands_on' }
         expect(gem[0].platform).to eq 'ruby'
-        expect(gem[0].version).to eq Gem::Version.new('0.1.2')
+        expect(gem[0].version).to eq '0.1.2'
       end
     end
   end

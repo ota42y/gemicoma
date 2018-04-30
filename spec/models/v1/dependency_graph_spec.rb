@@ -9,9 +9,9 @@ describe ::V1::DependencyGraph do
     no_platform = ::Dump::Rubygems::Rubygem.create!(name: 'no_platform')
     ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: no_platform, number: '5.1.0', platform: 'ruby')
 
-    rails_gem = V1::GemSpecification.new(name: 'rails', version: '5.0.0', platform: 'ruby')
-    unknown_gem = V1::GemSpecification.new(name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
-    no_platform = V1::GemSpecification.new(name: 'no_platform', version: '1.0.0', platform: 'none')
+    rails_gem = build(:github_ruby_commit_specification, name: 'rails', version: '5.0.0', platform: 'ruby')
+    unknown_gem = build(:github_ruby_commit_specification, name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
+    no_platform = build(:github_ruby_commit_specification, name: 'no_platform', version: '1.0.0', platform: 'none')
 
     lock = V1::Dependency::GemLock.new(nil, [rails_gem, unknown_gem, no_platform])
     graph = ::V1::DependencyGraph.new(lock)

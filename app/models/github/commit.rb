@@ -21,7 +21,7 @@
 
 class Github::Commit < ApplicationRecord
   belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_commits
-  has_many :github_ruby_commit_gems, class_name: 'Github::Ruby::CommitGem', dependent: :destroy, inverse_of: :github_commit
+  has_many :github_ruby_commit_specifications, class_name: 'Github::Ruby::CommitSpecification', dependent: :destroy, inverse_of: :github_commit
 
   enum status: { initialized: 0, done: 1 }
 end

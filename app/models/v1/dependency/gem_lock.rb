@@ -6,7 +6,7 @@ class V1::Dependency::GemLock
       parser = ::Bundler::LockfileParser.new(gemfile_lock_str)
 
       specifications = parser.specs.map do |spec|
-        ::V1::GemSpecification.new(name: spec.name, version: spec.version, platform: spec.platform)
+        ::Github::Ruby::CommitSpecification.new(name: spec.name, version: spec.version, platform: spec.platform)
       end
 
       self.new(parser, specifications)
