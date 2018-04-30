@@ -18,12 +18,12 @@ describe CheckNewCommitJob, type: :model do
 
       before do
         github_commit
-        allow(AnalyzeCommitService).to receive(:execute).and_return(true)
+        allow(V1::GithubCommitAnalyzer).to receive(:execute).and_return(true)
       end
 
       it do
         expect(subject).to eq true
-        expect(AnalyzeCommitService).to have_received(:execute).once
+        expect(V1::GithubCommitAnalyzer).to have_received(:execute).once
       end
     end
   end

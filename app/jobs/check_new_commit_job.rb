@@ -7,6 +7,6 @@ class CheckNewCommitJob < ApplicationJob
     commit = ::Github::Commit.find_by(id: commit_id)
     return false unless commit
 
-    AnalyzeCommitService.execute(commit)
+    V1::GithubCommitAnalyzer.execute(commit)
   end
 end

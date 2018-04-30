@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AnalyzeCommitService, type: :model do
+describe V1::GithubCommitAnalyzer, type: :model do
   describe 'execute' do
-    subject { AnalyzeCommitService.execute(commit) }
+    subject { V1::GithubCommitAnalyzer.execute(commit) }
 
     context 'analyze rubygem repository' do
       let(:commit) do
@@ -12,11 +12,16 @@ describe AnalyzeCommitService, type: :model do
       end
 
       it do
+        data = instance_double(V1::Github::GemData)
+        allow(V1::Github::GemData).to receive(:new).and_return(data)
+
         d = instance_double(V1::RubygemAnalyzer)
         allow(d).to receive(:save!)
-        allow(V1::RubygemAnalyzer).to receive(:new).and_return(d)
+        allow(V1::RubygemAnalyzer).to receive(:new).with(data).and_return(d)
 
         expect(subject).to eq true
+
+        expect(V1::Github::GemData).to have_received(:new).once
 
         expect(d).to have_received(:save!).once
         expect(commit.done?).to eq true
@@ -32,10 +37,12 @@ describe AnalyzeCommitService, type: :model do
 
       it do
         allow(V1::RubygemAnalyzer).to receive(:new)
+        allow(V1::Github::GemData).to receive(:new)
 
         expect(subject).to eq false
 
         expect(V1::RubygemAnalyzer).not_to have_received(:new)
+        expect(V1::Github::GemData).not_to have_received(:new)
       end
     end
   end
