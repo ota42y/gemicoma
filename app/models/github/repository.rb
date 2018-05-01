@@ -29,4 +29,8 @@ class Github::Repository < ApplicationRecord
                             dependent: :destroy,
                             inverse_of: :github_repository,
                             foreign_key: :github_repository_id
+  # rails/arel
+  def github_path
+    "#{github_user.name}/#{repository}"
+  end
 end

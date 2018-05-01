@@ -5,6 +5,7 @@ class V1::DependencyGraph
     @gem_lock = gem_lock
   end
 
+  # @return [Array<V1::GemVersionInfo>]
   def dependencies
     @dependencies ||= load_dependencies
   end
