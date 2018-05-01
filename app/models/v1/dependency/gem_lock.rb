@@ -1,7 +1,7 @@
 
-# solv gemfile lock dependency
 class V1::Dependency::GemLock
   class << self
+    # @return [V1::Dependency::GemLock]
     def create_from_gemfile_lock(gemfile_lock_str)
       parser = ::Bundler::LockfileParser.new(gemfile_lock_str)
 
@@ -13,11 +13,15 @@ class V1::Dependency::GemLock
     end
   end
 
+  # @return [Array<Github::Ruby::CommitSpecification>]
   attr_accessor :specifications
 
+  # @param [::Bundelr::LockfileParser] parser
+  # @param [Array<Github::Ruby::CommitSpecification>] specifications
   def initialize(parser, specifications)
     @parser = parser
     @specifications = specifications
   end
+
   delegate :sources, to: :@parser
 end

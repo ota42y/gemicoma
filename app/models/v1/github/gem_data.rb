@@ -9,12 +9,27 @@ module V1
       end
 
       def build!
-        @gemfile_lock ||= ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
+        build_gemfile_lock
+
+        true
+      end
+
+      def save!
+        ::Github::Ruby::CommitSpecification.import @gemfile_lock.specifications
 
         true
       end
 
       private
+
+        def build_gemfile_lock
+          return @gemfile_lock if @gemfile_lock
+
+          @gemfile_lock = ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
+          @gemfile_lock.specifications.each do |s|
+            s.github_commit = commit
+          end
+        end
 
         def gemfile_lock_str
           @gemfile_lock_str = open(gemfile_lock_url).read # rubocop:disable Security/Open

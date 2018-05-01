@@ -10,6 +10,7 @@ describe V1::Github::GemData, type: :model do
       let(:commit) do
         c = build(:github_commit)
         c.github_repository.github_ruby_gem_info = build(:github_ruby_gem_info)
+        c.save!
         c
       end
 
@@ -20,11 +21,15 @@ describe V1::Github::GemData, type: :model do
 
       it do
         expect(subject.build!).to eq true
+        expect { subject.save! }.to change(Github::Ruby::CommitSpecification, :count).by(2)
 
         gemfile_lock = subject.gemfile_lock
         gem = gemfile_lock.specifications.select { |n| n.name == 'ota42y_rubygems_hands_on' }
         expect(gem[0].platform).to eq 'ruby'
         expect(gem[0].version).to eq '0.1.2'
+
+        commit.reload
+        expect(commit.github_ruby_commit_specifications.size).to eq 2
       end
     end
   end
