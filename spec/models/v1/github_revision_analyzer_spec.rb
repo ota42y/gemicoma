@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-describe V1::GithubCommitAnalyzer, type: :model do
+describe V1::GithubRevisionAnalyzer, type: :model do
   describe 'execute' do
-    subject { V1::GithubCommitAnalyzer.execute(commit) }
+    subject { V1::GithubRevisionAnalyzer.execute(revision) }
 
     context 'analyze rubygem repository' do
-      let(:commit) do
-        c = build(:github_commit)
-        c.github_repository.github_ruby_gem_info = build(:github_ruby_gem_info)
+      let(:revision) do
+        c = build(:revision, repository: create(:github_repository))
+        c.repository.github_ruby_gem_info = build(:github_ruby_gem_info)
         c
       end
 
@@ -21,14 +21,14 @@ describe V1::GithubCommitAnalyzer, type: :model do
 
         expect(data).to have_received(:save!).once
         expect(data).to have_received(:build!).once
-        expect(commit.done?).to eq true
+        expect(revision.done?).to eq true
       end
     end
 
     context 'skip already done' do
-      let(:commit) do
-        c = build(:github_commit, status: :done)
-        c.github_repository.github_ruby_gem_info = build(:github_ruby_gem_info)
+      let(:revision) do
+        c = build(:revision, repository: create(:github_repository), status: :done)
+        c.repository.github_ruby_gem_info = build(:github_ruby_gem_info)
         c
       end
 

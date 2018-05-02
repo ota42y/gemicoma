@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_30_153337) do
+ActiveRecord::Schema.define(version: 2018_05_02_152831) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -29,42 +29,12 @@ ActiveRecord::Schema.define(version: 2018_04_30_153337) do
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
-  create_table "github_commits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "github_repository_id", null: false
-    t.string "commit_hash", null: false
-    t.integer "status", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["github_repository_id", "commit_hash"], name: "index_github_commits_on_github_repository_id_and_commit_hash", unique: true
-    t.index ["status"], name: "index_github_commits_on_status"
-  end
-
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "github_user_id", null: false
     t.string "repository", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["github_user_id", "repository"], name: "user_id_repository_unique", unique: true
-  end
-
-  create_table "github_ruby_commit_gems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "github_commit_id", null: false
-    t.string "name", null: false
-    t.string "number", null: false
-    t.string "platform", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["github_commit_id", "name"], name: "commit_gem_unique", unique: true
-  end
-
-  create_table "github_ruby_commit_specifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "github_commit_id", null: false
-    t.string "name", null: false
-    t.string "version", null: false
-    t.string "platform", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["github_commit_id", "name"], name: "commit_gem_unique", unique: true
   end
 
   create_table "github_ruby_gem_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -82,15 +52,34 @@ ActiveRecord::Schema.define(version: 2018_04_30_153337) do
     t.index ["name"], name: "index_github_users_on_name", unique: true
   end
 
+  create_table "revision_ruby_specifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "revision_id", null: false
+    t.string "name", null: false
+    t.string "version", null: false
+    t.string "platform", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["revision_id", "name"], name: "revision_name_unique", unique: true
+    t.index ["revision_id"], name: "index_revision_ruby_specifications_on_revision_id"
+  end
+
+  create_table "revisions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "repository_id", null: false
+    t.integer "repository_type", null: false
+    t.string "commit_hash", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "repository_type", "commit_hash"], name: "revision_commit_hash_unique", unique: true
+    t.index ["status"], name: "index_revisions_on_status"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
-  add_foreign_key "github_commits", "github_repositories"
   add_foreign_key "github_repositories", "github_users"
-  add_foreign_key "github_ruby_commit_gems", "github_commits"
-  add_foreign_key "github_ruby_commit_specifications", "github_commits"
   add_foreign_key "github_ruby_gem_infos", "github_repositories"
 end

@@ -1,11 +1,11 @@
 module V1
   module Github
     class GemData
-      attr_reader :commit, :gemfile_lock
+      attr_reader :commit, :gemfile_lock, :revision
 
-      # @param [Github::Commit] commit
-      def initialize(commit)
-        @commit = commit
+      # @param [Revision] revision
+      def initialize(revision)
+        @revision = revision
       end
 
       def build!
@@ -15,7 +15,7 @@ module V1
       end
 
       def save!
-        ::Github::Ruby::CommitSpecification.import @gemfile_lock.specifications
+        ::Revision::Ruby::Specification.import @gemfile_lock.specifications
 
         true
       end
@@ -27,7 +27,7 @@ module V1
 
           @gemfile_lock = ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
           @gemfile_lock.specifications.each do |s|
-            s.github_commit = commit
+            s.revision = revision
           end
         end
 
@@ -36,11 +36,11 @@ module V1
         end
 
         def gemfile_lock_url
-          File.join(base_url, @commit.github_repository.github_ruby_gem_info.gemfile_path, 'Gemfile.lock')
+          File.join(base_url, revision.repository.github_ruby_gem_info.gemfile_path, 'Gemfile.lock')
         end
 
         def base_url
-          "https://raw.githubusercontent.com/rails/rails/#{@commit.commit_hash}/"
+          "https://raw.githubusercontent.com/rails/rails/#{@revision.commit_hash}/"
         end
     end
   end

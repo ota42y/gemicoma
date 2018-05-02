@@ -6,18 +6,18 @@ class V1::Dependency::GemLock
       parser = ::Bundler::LockfileParser.new(gemfile_lock_str)
 
       specifications = parser.specs.map do |spec|
-        ::Github::Ruby::CommitSpecification.new(name: spec.name, version: spec.version, platform: spec.platform)
+        ::Revision::Ruby::Specification.new(name: spec.name, version: spec.version, platform: spec.platform)
       end
 
       self.new(parser, specifications)
     end
   end
 
-  # @return [Array<Github::Ruby::CommitSpecification>]
+  # @return [Array<Revision::Ruby::Specification>]
   attr_accessor :specifications
 
   # @param [::Bundelr::LockfileParser] parser
-  # @param [Array<Github::Ruby::CommitSpecification>] specifications
+  # @param [Array<Revision::Ruby::Specification>] specifications
   def initialize(parser, specifications)
     @parser = parser
     @specifications = specifications

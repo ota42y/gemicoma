@@ -8,11 +8,11 @@ class Github::RepositoriesController < ApplicationController
     user = ::Github::User.find_or_create_by!(name: params[:user])
     repository = user.github_repositories.find_or_initialize_by(repository: params[:repository])
     add_bundle_files(repository)
-    commit = add_commit_hash(repository)
+    revision = add_revision(repository)
 
     user.save!
 
-    ::CheckNewCommitJob.perform_later(commit.id, true)
+    ::CheckNewRevisionJob.perform_later(revision.id, true)
 
     redirect_to "/github/users/#{user.name}/repositories/#{repository.repository}"
   end
@@ -28,9 +28,10 @@ class Github::RepositoriesController < ApplicationController
       b.gemfile_path = rubygem['gemfile_path']
     end
 
-    def add_commit_hash(repository)
-      commit = repository.github_commits.find_or_initialize_by(commit_hash: params[:commit_hash])
-      commit.status = :initialized
-      commit
+    # @param [Github::Repository] repository
+    def add_revision(repository)
+      revision = repository.revisions.find_or_initialize_by(commit_hash: params[:commit_hash])
+      revision.status = :initialized
+      revision
     end
 end

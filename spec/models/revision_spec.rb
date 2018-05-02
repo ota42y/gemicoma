@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Github::Ruby::CommitSpecification, type: :model do
+RSpec.describe Revision, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
