@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_02_152831) do
+ActiveRecord::Schema.define(version: 2018_05_03_000405) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
     t.index ["name"], name: "index_github_users_on_name", unique: true
   end
 
+  create_table "revision_dependency_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "revision_id", null: false
+    t.integer "dependency_type", null: false
+    t.string "source_filepath", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["revision_id"], name: "index_revision_dependency_files_on_revision_id"
+  end
+
   create_table "revision_ruby_specifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "revision_id", null: false
     t.string "name", null: false
@@ -82,4 +92,5 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
   add_foreign_key "github_repositories", "github_users"
   add_foreign_key "github_ruby_gem_infos", "github_repositories"
+  add_foreign_key "revision_dependency_files", "revisions"
 end

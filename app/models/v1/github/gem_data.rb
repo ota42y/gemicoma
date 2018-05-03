@@ -10,12 +10,14 @@ module V1
 
       def build!
         build_gemfile_lock
+        @revision.revision_dependency_files.build(dependency_type: :gemfile_lock, source_filepath: gemfile_lock_path, body: @gemfile_lock_str)
 
         true
       end
 
       def save!
         ::Revision::Ruby::Specification.import @gemfile_lock.specifications
+        @revision.save!
 
         true
       end
@@ -36,7 +38,11 @@ module V1
         end
 
         def gemfile_lock_url
-          File.join(base_url, revision.repository.github_ruby_gem_info.gemfile_path, 'Gemfile.lock')
+          File.join(base_url, gemfile_lock_path)
+        end
+
+        def gemfile_lock_path
+          File.join(revision.repository.github_ruby_gem_info.gemfile_path, 'Gemfile.lock')
         end
 
         def base_url
