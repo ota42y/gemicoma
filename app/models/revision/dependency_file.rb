@@ -22,5 +22,11 @@
 class Revision::DependencyFile < ApplicationRecord
   belongs_to :revision, inverse_of: :revision_dependency_files
 
+  has_many :revision_ruby_specifications,
+           class_name: 'Revision::Ruby::Specification',
+           dependent: :destroy,
+           inverse_of: :revision_dependency_file,
+           foreign_key: :revision_dependency_file_id
+
   enum dependency_type: { gemfile_lock: 1 }
 end

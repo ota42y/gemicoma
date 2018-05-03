@@ -19,7 +19,6 @@
 class Revision < ApplicationRecord
   belongs_to :repository, polymorphic: true
 
-  has_many :revision_ruby_specifications, class_name: 'Revision::Ruby::Specification', dependent: :destroy, inverse_of: :revision
   has_many :revision_dependency_files, class_name: 'Revision::DependencyFile', dependent: :destroy, inverse_of: :revision
 
   enum status: { initialized: 0, done: 1 }

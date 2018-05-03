@@ -13,7 +13,7 @@ class V1::Dependency::GemLock
     end
   end
 
-  # @return [Array<Revision::Ruby::Specification>]
+  # @return [Array<Revision::Ruby::Specification>] specifications
   attr_accessor :specifications
 
   # @param [::Bundelr::LockfileParser] parser

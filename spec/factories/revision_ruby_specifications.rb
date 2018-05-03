@@ -2,22 +2,21 @@
 #
 # Table name: revision_ruby_specifications
 #
-#  id          :bigint(8)        not null, primary key
-#  revision_id :bigint(8)        not null
-#  name        :string(255)      not null
-#  version     :string(255)      not null
-#  platform    :string(255)      not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                          :bigint(8)        not null, primary key
+#  revision_dependency_file_id :bigint(8)        not null
+#  name                        :string(255)      not null
+#  version                     :string(255)      not null
+#  platform                    :string(255)      not null
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
 #
 # Indexes
 #
-#  index_revision_ruby_specifications_on_revision_id  (revision_id)
-#  revision_name_unique                               (revision_id,name) UNIQUE
+#  dependency_file_name_unique  (revision_dependency_file_id,name) UNIQUE
 #
 
 FactoryBot.define do
   factory :revision_ruby_specification, class: 'Revision::Ruby::Specification' do
-    revision
+    revision_dependency_file
   end
 end

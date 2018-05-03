@@ -1,7 +1,7 @@
 module V1
   module Github
     class GemData
-      attr_reader :commit, :gemfile_lock, :revision
+      attr_reader :revision, :gemfile_lock
 
       # @param [Revision] revision
       def initialize(revision)
@@ -9,15 +9,15 @@ module V1
       end
 
       def build!
+        @revision.revision_dependency_files.build(dependency_type: :gemfile_lock, source_filepath: gemfile_lock_path, body: gemfile_lock_str)
+        @revision.save!
         build_gemfile_lock
-        @revision.revision_dependency_files.build(dependency_type: :gemfile_lock, source_filepath: gemfile_lock_path, body: @gemfile_lock_str)
 
         true
       end
 
       def save!
         ::Revision::Ruby::Specification.import @gemfile_lock.specifications
-        @revision.save!
 
         true
       end
@@ -29,7 +29,7 @@ module V1
 
           @gemfile_lock = ::V1::Dependency::GemLock.create_from_gemfile_lock(gemfile_lock_str)
           @gemfile_lock.specifications.each do |s|
-            s.revision = revision
+            s.revision_dependency_file = @revision.revision_dependency_files.first
           end
         end
 

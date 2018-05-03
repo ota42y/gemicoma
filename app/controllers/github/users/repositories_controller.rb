@@ -5,8 +5,10 @@ class Github::Users::RepositoriesController < ApplicationController
 
     # @type [Revision] @revision
     @revision = @repository.revisions.first
+    # @type [Revision::DependencyFile] dependency
+    dependency = @revision.revision_dependency_files.first
 
-    lock = V1::Dependency::GemLock.new(nil, @revision.revision_ruby_specifications)
+    lock = V1::Dependency::GemLock.new(nil, dependency.revision_ruby_specifications)
     @dependency_graph = ::V1::DependencyGraph.new(lock)
 
     render :show

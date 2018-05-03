@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_000405) do
+ActiveRecord::Schema.define(version: 2018_05_02_152831) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -63,14 +63,13 @@ ActiveRecord::Schema.define(version: 2018_05_03_000405) do
   end
 
   create_table "revision_ruby_specifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "revision_id", null: false
+    t.bigint "revision_dependency_file_id", null: false
     t.string "name", null: false
     t.string "version", null: false
     t.string "platform", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["revision_id", "name"], name: "revision_name_unique", unique: true
-    t.index ["revision_id"], name: "index_revision_ruby_specifications_on_revision_id"
+    t.index ["revision_dependency_file_id", "name"], name: "dependency_file_name_unique", unique: true
   end
 
   create_table "revisions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

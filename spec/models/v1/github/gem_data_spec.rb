@@ -29,13 +29,14 @@ describe V1::Github::GemData, type: :model do
         expect(gem[0].version).to eq '0.1.2'
 
         revision.reload
-        expect(revision.revision_ruby_specifications.size).to eq 2
 
         # @type [Revision::DependencyFile] dependency_file
         dependency_file = revision.revision_dependency_files.first
         expect(dependency_file.source_filepath).to eq('./Gemfile.lock')
         expect(dependency_file.body).to eq(gemfile_text)
         expect(dependency_file.gemfile_lock?).to eq true
+
+        expect(dependency_file.revision_ruby_specifications.size).to eq 2
       end
     end
   end
