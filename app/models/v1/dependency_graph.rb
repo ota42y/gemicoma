@@ -1,8 +1,9 @@
 class V1::DependencyGraph
   CHECK_SIZE = 50
 
-  def initialize(gem_lock)
-    @gem_lock = gem_lock
+  # @param [Revision::DependencyFile] dependency_file
+  def initialize(dependency_file)
+    @dependency_file = dependency_file
   end
 
   # @return [Array<V1::GemVersionInfo>]
@@ -14,7 +15,7 @@ class V1::DependencyGraph
 
     def load_dependencies
       dependencies = []
-      @gem_lock.specifications.each_slice(CHECK_SIZE) do |specs|
+      @dependency_file.revision_ruby_specifications.each_slice(CHECK_SIZE) do |specs|
         dump_gems = ::Dump::Rubygems::Rubygem.
                       where(name: specs.map(&:name)).
                       includes(:dump_rubygems_versions).

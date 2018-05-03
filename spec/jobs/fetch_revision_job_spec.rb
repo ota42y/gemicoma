@@ -8,7 +8,9 @@ describe FetchRevisionJob, type: :model do
       let(:revision_id) { 0 }
 
       it do
-        expect(subject).to eq false
+        ret = nil
+        expect { ret = subject }.not_to enqueue_job(::AnalyzeRevisionJob)
+        expect(ret).to eq false
       end
     end
 
@@ -18,12 +20,14 @@ describe FetchRevisionJob, type: :model do
 
       before do
         revision
-        allow(V1::GithubRevisionAnalyzer).to receive(:execute).and_return(true)
+        allow(V1::Github::Fetcher).to receive(:execute).and_return(true)
       end
 
       it do
-        expect(subject).to eq true
-        expect(V1::GithubRevisionAnalyzer).to have_received(:execute).once
+        ret = nil
+        expect { ret = subject }.to enqueue_job(::AnalyzeRevisionJob)
+        expect(ret).to eq true
+        expect(V1::Github::Fetcher).to have_received(:execute).once
       end
     end
   end

@@ -1,4 +1,4 @@
-class FetchRevisionJob < ApplicationJob
+class AnalyzeRevisionJob < ApplicationJob
   queue_as :default
 
   def perform(revision_id, need_sleep)
@@ -7,9 +7,6 @@ class FetchRevisionJob < ApplicationJob
     revision = Revision.find_by(id: revision_id)
     return false unless revision
 
-    V1::Github::Fetcher.execute(revision)
-    AnalyzeRevisionJob.perform_later(revision_id, need_sleep)
-
-    true
+    V1::Analyzer::Revision.execute(revision)
   end
 end

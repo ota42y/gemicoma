@@ -9,12 +9,12 @@ describe ::V1::DependencyGraph do
     no_platform = ::Dump::Rubygems::Rubygem.create!(name: 'no_platform')
     ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: no_platform, number: '5.1.0', platform: 'ruby')
 
-    rails_gem = build_stubbed(:revision_ruby_specification, name: 'rails', version: '5.0.0', platform: 'ruby')
-    unknown_gem = build_stubbed(:revision_ruby_specification, name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
-    no_platform = build_stubbed(:revision_ruby_specification, name: 'no_platform', version: '1.0.0', platform: 'none')
+    dependency_file = build(:revision_dependency_file, :gemfile_lock)
+    dependency_file.revision_ruby_specifications.build(name: 'rails', version: '5.0.0', platform: 'ruby')
+    dependency_file.revision_ruby_specifications.build(name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
+    dependency_file.revision_ruby_specifications.build(name: 'no_platform', version: '1.0.0', platform: 'none')
 
-    lock = V1::Dependency::GemLock.new(nil, [rails_gem, unknown_gem, no_platform])
-    graph = ::V1::DependencyGraph.new(lock)
+    graph = ::V1::DependencyGraph.new(dependency_file)
 
     expect(graph.dependencies.empty?).to eq false
 
