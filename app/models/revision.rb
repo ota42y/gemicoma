@@ -21,5 +21,5 @@ class Revision < ApplicationRecord
 
   has_many :revision_dependency_files, class_name: 'Revision::DependencyFile', dependent: :destroy, inverse_of: :revision
 
-  enum status: { initialized: 0, done: 1 }
+  enum status: { initialized: 0, downloaded: 1, done: 2 }
 end

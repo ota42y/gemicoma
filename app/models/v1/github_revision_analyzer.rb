@@ -3,12 +3,12 @@ module V1
     class << self
       # @param [Revision] revision
       def execute(revision)
-        return false if revision.done? # other thread done
+        return false unless revision.initialize? # other thread done
 
         ruby_gem_info = revision.repository.github_ruby_gem_info
         analyze_rubygem(revision) if ruby_gem_info
 
-        revision.done!
+        revision.downloaded!
         true
       end
 

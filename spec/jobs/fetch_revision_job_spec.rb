@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe CheckNewRevisionJob, type: :model do
+describe FetchRevisionJob, type: :model do
   describe 'perform' do
-    subject { CheckNewRevisionJob.perform_now(revision_id, false) }
+    subject { FetchRevisionJob.perform_now(revision_id, false) }
 
     context 'not exist' do
       let(:revision_id) { 0 }

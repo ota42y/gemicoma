@@ -1,4 +1,4 @@
-class CheckNewRevisionJob < ApplicationJob
+class FetchRevisionJob < ApplicationJob
   queue_as :default
 
   def perform(revision_id, need_sleep)

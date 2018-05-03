@@ -12,7 +12,7 @@ class Github::RepositoriesController < ApplicationController
 
     user.save!
 
-    ::CheckNewRevisionJob.perform_later(revision.id, true)
+    ::FetchRevisionJob.perform_later(revision.id, true)
 
     redirect_to "/github/users/#{user.name}/repositories/#{repository.repository}"
   end

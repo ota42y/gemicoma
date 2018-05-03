@@ -36,7 +36,7 @@ describe Github::RepositoriesController, type: :request do
       let(:commit_hash) { SecureRandom.hex(40) }
 
       it do
-        expect { subject }.to enqueue_job(::CheckNewRevisionJob)
+        expect { subject }.to enqueue_job(::FetchRevisionJob)
 
         expect(response.status).to eq 302
 
