@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
 
   create_table "revisions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "repository_id", null: false
-    t.integer "repository_type", null: false
+    t.string "repository_type", null: false
     t.string "commit_hash", null: false
     t.integer "status", null: false
     t.datetime "created_at", null: false

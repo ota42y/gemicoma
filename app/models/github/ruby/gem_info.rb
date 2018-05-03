@@ -19,4 +19,8 @@
 
 class Github::Ruby::GemInfo < ApplicationRecord
   belongs_to :github_repository, class_name: 'Github::Repository', inverse_of: :github_ruby_gem_info
+
+  def gemfile_lock_relative_path
+    File.join(gemfile_path, 'Gemfile.lock')
+  end
 end

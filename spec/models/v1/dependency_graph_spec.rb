@@ -30,4 +30,10 @@ describe ::V1::DependencyGraph do
     expect(graph.dependencies[2].version).to eq '1.0.0'
     expect(graph.dependencies[2].new_version).to eq '-'
   end
+
+  it 'when no data' do
+    graph = ::V1::DependencyGraph.new(nil)
+
+    expect(graph.dependencies.empty?).to eq true
+  end
 end

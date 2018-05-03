@@ -1,0 +1,11 @@
+<p>dependency</p>
+<table>
+  <th>name</th>
+  <th>version</th>
+  <th>new_version</th>
+  <% @dependency_graph.dependencies.each do |gem_version_info| %>
+    <td><%= gem_version_info.name %></td>
+    <td><%= gem_version_info.version %></td>
+    <td><%= gem_version_info.new_version %></td>
+  <% end %>
+</table>

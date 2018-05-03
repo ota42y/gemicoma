@@ -31,7 +31,7 @@ module V1
         end
 
         def gemfile_lock_path
-          File.join(@revision.repository.github_ruby_gem_info.gemfile_path, 'Gemfile.lock')
+          @gemfile_lock_path ||= @revision.repository.github_ruby_gem_info.gemfile_lock_relative_path
         end
 
         def base_url

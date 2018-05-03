@@ -14,6 +14,8 @@ class V1::DependencyGraph
   private
 
     def load_dependencies
+      return [] unless @dependency_file
+
       dependencies = []
       @dependency_file.revision_ruby_specifications.each_slice(CHECK_SIZE) do |specs|
         dump_gems = ::Dump::Rubygems::Rubygem.

@@ -2,7 +2,7 @@ class CreateRevisions < ActiveRecord::Migration[5.2]
   def change
     create_table :revisions do |t|
       t.integer :repository_id, null: false
-      t.integer :repository_type, null: false
+      t.string :repository_type, null: false
       t.string :commit_hash, null: false
 
       t.integer :status, null: false, index: true

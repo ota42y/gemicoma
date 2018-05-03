@@ -5,10 +5,13 @@ class Github::Users::RepositoriesController < ApplicationController
 
     # @type [Revision] @revision
     @revision = @repository.revisions.first
-    # @type [Revision::DependencyFile] dependency
-    dependency = @revision.revision_dependency_files.first
 
-    @dependency_graph = ::V1::DependencyGraph.new(dependency)
+    if @revision.done?
+      # @type [Revision::DependencyFile] dependency
+      dependency = @revision.revision_dependency_files.first
+
+      @dependency_graph = ::V1::DependencyGraph.new(dependency)
+    end
 
     render :show
   end
