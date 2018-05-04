@@ -5,7 +5,7 @@
 
     <%= form.fields(:bundle_files) do |fields| %>
         <%= fields.fields(:rubygem) do |rubygem| %>
-            <%= rubygem.text_field :gemfile_path, value: './' %>
+            <%= rubygem.text_field :gemfile_path %>
         <% end %>
     <% end %>
 
