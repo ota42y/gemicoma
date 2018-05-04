@@ -23,23 +23,11 @@ module V1
       private
 
         def gemfile_lock_str
-          @gemfile_lock_str = open(gemfile_lock_url).read # rubocop:disable Security/Open
-        end
-
-        def gemfile_lock_url
-          File.join(base_url, gemfile_lock_path)
+          @gemfile_lock_str ||= ::V1::GithubRepository.contents_by_string(@repository.github_path, gemfile_lock_path, @revision.commit_hash)
         end
 
         def gemfile_lock_path
           @gemfile_lock_path ||= @revision.repository.github_ruby_gem_info.gemfile_lock_relative_path
-        end
-
-        def base_url
-          File.join(github_path, @revision.commit_hash)
-        end
-
-        def github_path
-          File.join('https://raw.githubusercontent.com', @repository.github_path)
         end
     end
   end

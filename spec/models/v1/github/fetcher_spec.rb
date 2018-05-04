@@ -14,12 +14,13 @@ describe V1::Github::Fetcher, type: :model do
         c
       end
 
-      before do
-        stub_request(:get, "https://raw.githubusercontent.com/#{revision.repository.github_path}/#{revision.commit_hash}/Gemfile.lock").
-          to_return(body: gemfile_text)
-      end
-
       it do
+        allow(::V1::GithubRepository).to receive(:contents_by_string).
+                                           with(revision.repository.github_path,
+                                                revision.repository.github_ruby_gem_info.gemfile_lock_relative_path,
+                                                revision.commit_hash).
+                                           and_return(gemfile_text)
+
         expect(subject).to eq true
 
         revision.reload

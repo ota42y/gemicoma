@@ -67,6 +67,7 @@ end
 gem 'activerecord-import'
 gem 'annotate', path: '../annotate_models'
 gem 'fincop'
+gem 'octokit'
 gem 'pg'
 gem 'redis-namespace'
 gem 'sidekiq'
