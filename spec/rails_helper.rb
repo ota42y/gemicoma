@@ -57,6 +57,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  config.include ActiveSupport::Testing::TimeHelpers
+
   ActiveJob::Base.queue_adapter = :test
 
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f } # rubocop:disable Rails/FilePath

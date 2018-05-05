@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id", "repository_type", "commit_hash"], name: "revision_commit_hash_unique", unique: true
+    t.index ["repository_id", "repository_type", "created_at"], name: "repository_create_at"
     t.index ["status"], name: "index_revisions_on_status"
   end
 

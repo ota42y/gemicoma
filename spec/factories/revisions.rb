@@ -13,6 +13,7 @@
 # Indexes
 #
 #  index_revisions_on_status    (status)
+#  repository_create_at         (repository_id,repository_type,created_at)
 #  revision_commit_hash_unique  (repository_id,repository_type,commit_hash) UNIQUE
 #
 

@@ -15,6 +15,11 @@ describe Github::Users::RepositoriesController, type: :request do
 
         # @type [Github::Repository] repository
         repository = user.github_repositories.find_or_create_by!(repository: repository_name)
+
+        travel(-1 * 1.minute) do
+          create(:revision, repository: repository, status: :done)
+        end
+
         # @type [Revision] revision
         revision = create(:revision, repository: repository, status: :done)
         # @type [Revision::DependencyFile] dependency_file
