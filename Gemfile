@@ -67,8 +67,10 @@ end
 gem 'activerecord-import'
 gem 'annotate', path: '../annotate_models'
 gem 'fincop'
+gem 'jquery-rails'
 gem 'octokit'
 gem 'pg'
 gem 'redis-namespace'
 gem 'sidekiq'
+gem 'twitter-bootstrap-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

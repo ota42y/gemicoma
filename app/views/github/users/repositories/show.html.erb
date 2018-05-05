@@ -1,9 +1,25 @@
-<p>repository: <%= @repository.github_path %></p>
-<p>commit_hash: <%= @revision.commit_hash%></p>
+<header>Gemicoma</header>
 
-<% if @revision.done? %>
-  <%= render partial: 'dependency', dependency_graph: @dependency_graph %>
-<% else %>
-  <p>fetching data...please wait</p>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <h1>Github repository</h1>
+      <p><%= @repository.github_path %></p>
+
+      <h1>Commit hash</h1>
+      <p><%= @revision.commit_hash%></p>
+
+      <h1>Dependency Graph</h1>
+      <% if @revision.done? %>
+        <%= render partial: 'dependency', dependency_graph: @dependency_graph %>
+      <% else %>
+        <p>fetching data...please wait</p>
+      <% end %>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</div>
+
+<footer style="background-color:gray">Footer</footer>
 
