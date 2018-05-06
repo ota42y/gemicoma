@@ -1,15 +1,13 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
-      <h1>Repositories</h1>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <h1>Repositories</h1>
 
-      <% @repositories.each do |repo| %>
-        <h3>
-          <%= link_to repo.github_path, github_user_repository_path(user_id: repo.github_user.name, id: repo.repository) %>
-        </h3>
-      <% end %>
-    </div>
-    <div class="col-sm-2"></div>
+    <% @repositories.each do |repo| %>
+      <h3>
+        <%= link_to repo.github_path, github_user_repository_path(user_id: repo.github_user.name, id: repo.repository) %>
+      </h3>
+    <% end %>
   </div>
+  <div class="col-sm-2"></div>
 </div>

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  get 'auth/:provider/callback', to: 'sessions#callback'
+  get '/logout', to: 'sessions#destroy'
+
   namespace :github do
     resources :repositories, only: [:new, :create]
 

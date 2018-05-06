@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_02_152831) do
+ActiveRecord::Schema.define(version: 2018_05_06_012845) do
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
+  end
+
+  create_table "github_auths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "uid", null: false
+    t.string "nickname", null: false
+    t.string "access_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uid"], name: "index_github_auths_on_uid", unique: true
+    t.index ["user_id"], name: "index_github_auths_on_user_id", unique: true
   end
 
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -90,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_05_02_152831) do
   end
 
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
+  add_foreign_key "github_auths", "users"
   add_foreign_key "github_repositories", "github_users"
   add_foreign_key "github_ruby_gem_infos", "github_repositories"
   add_foreign_key "revision_dependency_files", "revisions"

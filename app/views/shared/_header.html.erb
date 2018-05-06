@@ -1,5 +1,16 @@
 <header>
-  <h1>
-    <%= link_to 'Gemicoma', '/' %>
-  </h1>
+  <div class="row">
+    <div class="col-sm-8">
+      <h1>
+        <%= link_to 'Gemicoma', '/' %>
+      </h1>
+    </div>
+    <div class="col-sm-4">
+      <% if logged_in? %>
+        <%= link_to 'Sign out', '/signout' %>
+      <% else %>
+        <%= link_to 'Githubアカウントでログイン', '/auth/github' %>
+      <% end %>
+    </div>
+  </div>
 </header>
