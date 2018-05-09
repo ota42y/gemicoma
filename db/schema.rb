@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_012845) do
+ActiveRecord::Schema.define(version: 2018_05_09_141849) do
+
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admins_on_user_id", unique: true
+  end
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -99,6 +106,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_012845) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "admins", "users"
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
   add_foreign_key "github_auths", "users"
   add_foreign_key "github_repositories", "github_users"
