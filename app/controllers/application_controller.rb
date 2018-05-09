@@ -3,6 +3,26 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
+  rescue_from Exception do |e|
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace.join("\n")
+
+    if Rails.env.production?
+      render status: 500, json: { errors: [{ message: 'Internal server error' }] }
+    else
+      Rails.logger.fatal(e.backtrace[0..5].join("\n"))
+      render status: 500, json: { errors: [{ message: "#{e.message}: #{e.backtrace}" }] }
+    end
+  end
+
+  rescue_from ActionController::BadRequest do |e|
+    render status: 400, json: { errors: [{ message: e.message }] }
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render status: 404, json: { errors: [{ message: e.message }] }
+  end
+
   private
 
     def current_user

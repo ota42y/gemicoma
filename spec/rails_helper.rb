@@ -61,5 +61,11 @@ RSpec.configure do |config|
 
   ActiveJob::Base.queue_adapter = :test
 
+  OmniAuth.config.test_mode = true
+
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f } # rubocop:disable Rails/FilePath
+
+  config.before do
+    github_logout
+  end
 end

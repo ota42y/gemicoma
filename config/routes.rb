@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :github do
     resources :repositories, only: [:new, :create]
 
-    resources :users, only: [] do
+    resources :users, only: [:show] do
       scope module: :users do
         resources :repositories, only: [:show]
       end

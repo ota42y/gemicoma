@@ -48,13 +48,15 @@ describe Github::Users::RepositoriesController, type: :request do
       let(:repository_name) { 'test' }
 
       it 'no github user' do
-        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+        subject
+        expect(response.status).to eq 404
       end
 
       it 'no repository' do
         ::Github::User.find_or_create_by!(name: github_user)
 
-        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+        subject
+        expect(response.status).to eq 404
       end
     end
   end
