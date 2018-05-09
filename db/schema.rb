@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2018_05_06_012845) do
     t.bigint "user_id", null: false
     t.integer "uid", null: false
     t.string "nickname", null: false
-    t.string "access_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_github_auths_on_uid", unique: true
