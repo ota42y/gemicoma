@@ -7,6 +7,12 @@ module V1
         Base64.decode64(response.content)
       end
 
+      # @return [string]
+      def branch_commit_hash(repository_path, branch)
+        response = client.branch(repository_path, branch)
+        response['commit']['sha']
+      end
+
       private
 
         # @return [Octokit::Client]
