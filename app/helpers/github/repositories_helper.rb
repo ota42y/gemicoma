@@ -1,2 +1,0 @@
-module Github::RepositoriesHelper
-end
