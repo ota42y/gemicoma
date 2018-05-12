@@ -21,6 +21,17 @@ Things you may want to cover:
 
 * Deployment instructions
 
+## Setup
+Create Github OAuth App  
+https://github.com/settings/developers 
+
+```bash
+export GITHUB_KEY=xxx
+export GITHUB_SECRET=yyy
+
+./bin/rails s
+```
+
 # import rubygems dump
 
 ## install postgres container and clone rubygems docker

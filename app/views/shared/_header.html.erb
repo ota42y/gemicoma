@@ -7,9 +7,9 @@
     </div>
     <div class="col-sm-4">
       <% if logged_in? %>
-        <%= link_to 'Sign out', '/signout' %>
+        <%= link_to 'Sign out', '/logout' %>
       <% else %>
-        <%= link_to 'Githubアカウントでログイン', '/auth/github' %>
+        <%= link_to 'Sign in with Github account', '/auth/github' %>
       <% end %>
     </div>
   </div>

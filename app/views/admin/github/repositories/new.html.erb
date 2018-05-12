@@ -1,12 +1,33 @@
-<%= form_with url: admin_github_repositories_path do |form| %>
-  <%= form.label :user, class: "col-sm-2" %>
-  <%= form.text_field :github_repository %>
-  <%= form.text_field :branch %>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
 
-    <%= form.fields(:bundle_files) do |fields| %>
-        <%= fields.fields(:rubygem) do |rubygem| %>
+    <%= form_with url: admin_github_repositories_path do |form| %>
+      <div class="row">
+        <%= form.label :github_repository, class: "col-sm-2" %>
+        <%= form.text_field :github_repository %>
+      </div>
+      <div class="row">
+        <%= form.label :branch, class: "col-sm-2" %>
+        <%= form.text_field :branch %>
+      </div>
+
+      <div class="row">
+        <%= form.label :gemfile_path, class: "col-sm-2" %>
+        <%= form.fields(:bundle_files) do |fields| %>
+          <%= fields.fields(:rubygem) do |rubygem| %>
             <%= rubygem.text_field :gemfile_path %>
+          <% end %>
         <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <%= form.submit %>
+      </div>
     <% end %>
-    <%= form.submit %>
-<% end %>
+
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
