@@ -58,6 +58,15 @@ describe Github::Users::RepositoriesController, type: :request do
         subject
         expect(response.status).to eq 404
       end
+
+      it 'no revision' do
+        user = ::Github::User.find_or_create_by!(name: github_user)
+        user.github_repositories.find_or_create_by!(repository: repository_name, branch: 'master')
+
+        subject
+
+        expect(response.status).to eq 200
+      end
     end
   end
 end

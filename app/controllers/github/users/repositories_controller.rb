@@ -6,7 +6,7 @@ class Github::Users::RepositoriesController < ApplicationController
     # @type [Revision] @revision
     @revision = @repository.revisions.order(created_at: :desc).first
 
-    if @revision.done?
+    if @revision&.done?
       # @type [Revision::DependencyFile] dependency
       dependency = @revision.revision_dependency_files.first
 

@@ -5,10 +5,14 @@
     <p><%= @repository.github_path %></p>
 
     <h1>Commit hash</h1>
-    <p><%= @revision.commit_hash%></p>
+    <% if @revision %>
+      <p><%= @revision.commit_hash%></p>
+    <% else %>
+      <p>now checking master branch...</p>
+    <% end %>
 
     <h1>Dependency Graph</h1>
-    <% if @revision.done? %>
+    <% if @revision&.done? %>
       <%= render partial: 'dependency', dependency_graph: @dependency_graph %>
     <% else %>
       <p>fetching data...please wait</p>
