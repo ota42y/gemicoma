@@ -7,7 +7,7 @@ class FetchMasterJob < ApplicationJob
     repository = Github::Repository.find_by(id: repository_id)
     return false unless repository
 
-    revision = V1::Github::MasterFetcher.execute(repository)
+    revision = V1::Github::BranchFetcher.execute(repository)
     return false unless revision
 
     FetchRevisionJob.perform_later(revision.id, true)

@@ -34,6 +34,7 @@ describe Admin::Github::RepositoriesController, type: :request do
       let(:params) do
         {
           github_repository: github_repository,
+          branch: branch,
           public: true,
           bundle_files: bundle_files,
         }
@@ -43,6 +44,7 @@ describe Admin::Github::RepositoriesController, type: :request do
       let(:github_user) { 'ota42y' }
       let(:repository) { 'test' }
       let(:github_repository) { "#{github_user}/#{repository}" }
+      let(:branch) { 'master' }
 
       let(:admin_user) { create(:admin, user: github_auth.user) }
       let(:github_auth) { create(:github_auth, user: build(:user)) }
@@ -62,6 +64,7 @@ describe Admin::Github::RepositoriesController, type: :request do
 
           # @type [Github::Repository] github_repository
           github_repository = user.github_repositories.find_by!(repository: repository)
+          expect(github_repository.branch).to eq branch
 
           gem_info = github_repository.github_ruby_gem_info
           expect(gem_info.gemfile_path).to eq ''

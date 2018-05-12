@@ -14,7 +14,7 @@ describe Github::Users::RepositoriesController, type: :request do
         user = ::Github::User.find_or_create_by!(name: github_user)
 
         # @type [Github::Repository] repository
-        repository = user.github_repositories.find_or_create_by!(repository: repository_name)
+        repository = user.github_repositories.find_or_create_by!(repository: repository_name, branch: 'master')
 
         travel(-1 * 1.minute) do
           create(:revision, repository: repository, status: :done)

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe V1::Github::MasterFetcher, type: :model do
+describe V1::Github::BranchFetcher, type: :model do
   describe 'execute' do
-    subject { V1::Github::MasterFetcher.execute(repository) }
+    subject { V1::Github::BranchFetcher.execute(repository) }
 
     context 'get commit hash from github' do
       let(:repository) do

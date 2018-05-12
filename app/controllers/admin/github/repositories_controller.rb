@@ -10,7 +10,7 @@ class Admin::Github::RepositoriesController < Admin::BaseController
     repository = nil
     ActiveRecord::Base.transaction do
       user = ::Github::User.find_or_create_by!(name: user_name)
-      repository = user.github_repositories.find_or_initialize_by(repository: repository_name)
+      repository = user.github_repositories.find_or_initialize_by(repository: repository_name, branch: params[:branch])
       create_bundle_files(repository)
       user.save!
     end

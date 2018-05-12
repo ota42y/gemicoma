@@ -20,7 +20,7 @@ describe FetchMasterJob, type: :model do
 
       before do
         repository
-        allow(V1::Github::MasterFetcher).to receive(:execute).and_return(fetch_result)
+        allow(V1::Github::BranchFetcher).to receive(:execute).and_return(fetch_result)
       end
 
       context 'do something' do
@@ -31,7 +31,7 @@ describe FetchMasterJob, type: :model do
           ret = nil
           expect { ret = subject }.to have_enqueued_job(::FetchRevisionJob).with(revision.id, true)
           expect(ret).to eq true
-          expect(V1::Github::MasterFetcher).to have_received(:execute).once
+          expect(V1::Github::BranchFetcher).to have_received(:execute).once
         end
       end
 
@@ -42,7 +42,7 @@ describe FetchMasterJob, type: :model do
           ret = nil
           expect { ret = subject }.not_to enqueue_job(::FetchRevisionJob)
           expect(ret).to eq false
-          expect(V1::Github::MasterFetcher).to have_received(:execute).once
+          expect(V1::Github::BranchFetcher).to have_received(:execute).once
         end
       end
     end

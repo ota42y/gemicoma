@@ -5,6 +5,7 @@
 #  id             :bigint(8)        not null, primary key
 #  github_user_id :bigint(8)        not null
 #  repository     :string(255)      not null
+#  branch         :string(255)      not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -22,5 +23,6 @@ FactoryBot.define do
     github_user
 
     sequence(:repository, &:to_s)
+    branch 'master'
   end
 end

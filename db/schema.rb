@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_05_09_141849) do
   create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "github_user_id", null: false
     t.string "repository", null: false
+    t.string "branch", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["github_user_id", "repository"], name: "user_id_repository_unique", unique: true
