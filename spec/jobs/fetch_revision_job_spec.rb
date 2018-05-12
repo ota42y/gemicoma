@@ -25,7 +25,7 @@ describe FetchRevisionJob, type: :model do
 
       it do
         ret = nil
-        expect { ret = subject }.to enqueue_job(::AnalyzeRevisionJob)
+        expect { ret = subject }.to have_enqueued_job(::AnalyzeRevisionJob).with(revision.id, true)
         expect(ret).to eq true
         expect(V1::Github::Fetcher).to have_received(:execute).once
       end

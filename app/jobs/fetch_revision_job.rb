@@ -8,7 +8,7 @@ class FetchRevisionJob < ApplicationJob
     return false unless revision
 
     V1::Github::Fetcher.execute(revision)
-    AnalyzeRevisionJob.perform_later(revision_id, need_sleep)
+    AnalyzeRevisionJob.perform_later(revision_id, true)
 
     true
   end
