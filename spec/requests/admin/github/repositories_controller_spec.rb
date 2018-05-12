@@ -54,8 +54,7 @@ describe Admin::Github::RepositoriesController, type: :request do
         end
 
         it do
-          # expect { subject }.to enqueue_job(::FetchRevisionJob)
-          subject
+          expect { subject }.to enqueue_job(::FetchMasterJob)
 
           expect(response.status).to eq 302
 
