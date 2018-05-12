@@ -28,5 +28,6 @@ class User < ApplicationRecord
     end
   end
 
+  has_one :admin, dependent: :destroy
   has_one :github_auth, class_name: 'Github::Auth', dependent: :destroy, inverse_of: :user
 end

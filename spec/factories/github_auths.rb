@@ -23,6 +23,5 @@ FactoryBot.define do
   factory :github_auth, class: 'Github::Auth' do
     sequence(:uid) { |n| n + 42 }
     sequence(:nickname, &:to_s)
-    access_token { SecureRandom.hex(40) }
   end
 end

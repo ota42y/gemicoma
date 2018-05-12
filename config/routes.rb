@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#callback'
   get '/logout', to: 'sessions#destroy'
 
+  namespace :admin do
+    namespace :github do
+      resources :repositories, only: [:new, :create]
+    end
+  end
+
   namespace :github do
     resources :repositories, only: [:new, :create]
 

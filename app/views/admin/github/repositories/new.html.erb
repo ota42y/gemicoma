@@ -1,0 +1,11 @@
+<%= form_with url: github_repositories_path do |form| %>
+  <%= form.label :user, class: "col-sm-2" %>
+    <%= form.text_field :github_repository %>
+
+    <%= form.fields(:bundle_files) do |fields| %>
+        <%= fields.fields(:rubygem) do |rubygem| %>
+            <%= rubygem.text_field :gemfile_path %>
+        <% end %>
+    <% end %>
+    <%= form.submit %>
+<% end %>
