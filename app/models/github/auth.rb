@@ -28,7 +28,6 @@ class Github::Auth < ApplicationRecord
       a = self.new
       a.uid = auth['uid']
       a.nickname = auth['info']['nickname']
-      a.access_token = auth['credentials']['token']
 
       user.github_auth = a
     end
