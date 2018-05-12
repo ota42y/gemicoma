@@ -8,8 +8,11 @@ module V1
 
           revision.revision_dependency_files.each do |dependency|
             # @type [Revision::DependencyFile] dependency
-            ::V1::Analyzer::GemLock.execute(dependency) if dependency.gemfile_lock?
-            dependency.save!
+
+            ActiveRecord::Base.transaction do
+              ::V1::Analyzer::GemLock.execute(dependency) if dependency.gemfile_lock?
+              dependency.save!
+            end
           end
 
           revision.done!
