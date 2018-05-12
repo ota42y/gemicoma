@@ -74,5 +74,4 @@ gem 'omniauth-github'
 gem 'pg'
 gem 'redis-namespace'
 gem 'sidekiq'
-gem 'twitter-bootstrap-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

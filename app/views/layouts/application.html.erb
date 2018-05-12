@@ -9,11 +9,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="vsc-initialized">
     <%= render :partial => 'shared/header' %>
-    <div class="container-fluid">
-      <%= yield %>
-    </div>
+    <%= yield %>
     <%= render :partial => 'shared/footer' %>
   </body>
 </html>
