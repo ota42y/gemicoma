@@ -26,8 +26,9 @@ Create Github OAuth App
 https://github.com/settings/developers 
 
 ```bash
-export GITHUB_KEY=xxx
-export GITHUB_SECRET=yyy
+export GITHUB_CLIENT_ID=xxx
+export GITHUB_CLIENT_SECRET=yyy
+export GITHUB_ACCESS_TOKEN=zzz
 
 ./bin/rails s
 ```

@@ -17,7 +17,7 @@ module V1
 
         # @return [Octokit::Client]
         def client
-          ::Octokit::Client.new
+          ::Octokit::Client.new(access_token: ENV['GITHUB_ACCESS_TOKEN'])
         end
     end
   end

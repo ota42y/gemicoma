@@ -9,25 +9,23 @@
       </div>
       <div class="row">
         <%= form.label :branch, class: "col-sm-2" %>
-        <%= form.text_field :branch %>
+        <%= form.text_field :branch, value: 'master' %>
       </div>
 
       <div class="row">
         <%= form.label :gemfile_path, class: "col-sm-2" %>
         <%= form.fields(:bundle_files) do |fields| %>
           <%= fields.fields(:rubygem) do |rubygem| %>
-            <%= rubygem.text_field :gemfile_path %>
+            <%= rubygem.text_field :gemfile_path, value: './' %>
           <% end %>
         <% end %>
       </div>
 
       <div class="row">
         <div class="col-sm-2"></div>
-        <%= form.submit %>
+        <%= form.submit class: 'btn btn-primary' %>
       </div>
     <% end %>
-
   </div>
   <div class="col-sm-2"></div>
 </div>
-
