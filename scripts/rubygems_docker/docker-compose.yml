@@ -5,7 +5,7 @@ services:
     volumes:
       - postgres_vol:/var/lib/postgresql/data
     ports:
-      - 15432:5432
+      - 15433:5432
   rubygems:
     build:
       context: bulid_dockerfiles
