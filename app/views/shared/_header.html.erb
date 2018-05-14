@@ -1,0 +1,16 @@
+<header>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'Gemicoma', '/', class: 'navbar-brand' %>
+      </div>
+      <div class="nav navbar-form navbar-right">
+        <% if logged_in? %>
+          <%= link_to 'Sign out', '/logout' %>
+        <% else %>
+          <%= link_to 'Sign in with Github account', '/auth/github' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>

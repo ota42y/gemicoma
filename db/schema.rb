@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_094558) do
+ActiveRecord::Schema.define(version: 2018_05_09_141849) do
+
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admins_on_user_id", unique: true
+  end
 
   create_table "dump_rubygems_rubygems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -29,19 +36,70 @@ ActiveRecord::Schema.define(version: 2018_04_21_094558) do
     t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
-  create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "public", default: false, null: false
+  create_table "github_auths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "uid", null: false
+    t.string "nickname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_github_repositories_on_name", unique: true
+    t.index ["uid"], name: "index_github_auths_on_uid", unique: true
+    t.index ["user_id"], name: "index_github_auths_on_user_id", unique: true
   end
 
-  create_table "github_repository_bundle_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "kind", null: false
-    t.string "filepath", null: false
+  create_table "github_repositories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "github_user_id", null: false
+    t.string "repository", null: false
+    t.string "branch", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["github_user_id", "repository"], name: "user_id_repository_unique", unique: true
+  end
+
+  create_table "github_ruby_gem_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "github_repository_id", null: false
+    t.string "gemfile_path", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["github_repository_id"], name: "index_github_ruby_gem_infos_on_github_repository_id", unique: true
+  end
+
+  create_table "github_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_github_users_on_name", unique: true
+  end
+
+  create_table "revision_dependency_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "revision_id", null: false
+    t.integer "dependency_type", null: false
+    t.string "source_filepath", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["revision_id"], name: "index_revision_dependency_files_on_revision_id"
+  end
+
+  create_table "revision_ruby_specifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "revision_dependency_file_id", null: false
+    t.string "name", null: false
+    t.string "version", null: false
+    t.string "platform", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["revision_dependency_file_id", "name"], name: "dependency_file_name_unique", unique: true
+  end
+
+  create_table "revisions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "repository_id", null: false
+    t.string "repository_type", null: false
+    t.string "commit_hash", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "repository_type", "commit_hash"], name: "revision_commit_hash_unique", unique: true
+    t.index ["repository_id", "repository_type", "created_at"], name: "repository_create_at"
+    t.index ["status"], name: "index_revisions_on_status"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,5 +107,10 @@ ActiveRecord::Schema.define(version: 2018_04_21_094558) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "admins", "users"
   add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
+  add_foreign_key "github_auths", "users"
+  add_foreign_key "github_repositories", "github_users"
+  add_foreign_key "github_ruby_gem_infos", "github_repositories"
+  add_foreign_key "revision_dependency_files", "revisions"
 end

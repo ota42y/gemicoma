@@ -59,11 +59,19 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'factory_bot_rails'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'activerecord-import'
 gem 'annotate', path: '../annotate_models'
 gem 'fincop'
+gem 'jquery-rails'
+gem 'octokit'
+gem 'omniauth'
+gem 'omniauth-github'
 gem 'pg'
+gem 'redis-namespace'
+gem 'sidekiq'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

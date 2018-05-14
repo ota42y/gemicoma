@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_vol:/var/lib/postgresql/data
+    ports:
+      - 15432:5432
+  rubygems:
+    build:
+      context: bulid_dockerfiles
+      dockerfile: Dockerfile-rubygems
+    volumes:
+      - "$PWD:/scripts"
+      - rubygems_vol:/vender/bundle
+volumes:
+  postgres_vol:
+  rubygems_vol:
