@@ -3,8 +3,8 @@
 # Table name: dump_rubygems_rubygems
 #
 #  id         :bigint(8)        not null, primary key
-#  name       :string(255)      not null
-#  slug       :string(255)
+#  name       :string           not null
+#  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

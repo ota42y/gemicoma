@@ -21,8 +21,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
-## Setup
-Create Github OAuth App  
+## Development Setup
+Create Github OAuth App
 https://github.com/settings/developers 
 
 ```bash
@@ -43,9 +43,17 @@ cd scripts/rubygems_docker
 docker-compose up
 
 cd scripts/rubygems_docker
-docker-compose run rubygems /scripts/import_ruygem_data
+docker-compose run rubygems /scripts/import_ruygem_data master
 
 cd ../../
 ./bin/rails runner scripts/import_script.rb
 
 ```
+
+# init production env
+
+## create user
+connect to database
+
+psql -h localhost -p 15432 -U postgres
+create role gemicoma with createdb login password 'gemicoma';

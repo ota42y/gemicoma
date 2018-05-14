@@ -1,6 +1,8 @@
 #!/bin/bash
 
 pushd /rubygems.org
+git fetch --prune
+git checkout $1
 
 bundle install --path /vender/bundle
 

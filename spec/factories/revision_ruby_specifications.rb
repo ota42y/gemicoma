@@ -4,9 +4,9 @@
 #
 #  id                          :bigint(8)        not null, primary key
 #  revision_dependency_file_id :bigint(8)        not null
-#  name                        :string(255)      not null
-#  version                     :string(255)      not null
-#  platform                    :string(255)      not null
+#  name                        :string           not null
+#  version                     :string           not null
+#  platform                    :string           not null
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #

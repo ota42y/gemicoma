@@ -4,8 +4,8 @@
 #
 #  id              :bigint(8)        not null, primary key
 #  repository_id   :integer          not null
-#  repository_type :string(255)      not null
-#  commit_hash     :string(255)      not null
+#  repository_type :string           not null
+#  commit_hash     :string           not null
 #  status          :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
