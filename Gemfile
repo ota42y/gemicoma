@@ -65,7 +65,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'activerecord-import'
-gem 'annotate', path: '../annotate_models'
+gem 'annotate'
 gem 'fincop'
 gem 'jquery-rails'
 gem 'octokit'

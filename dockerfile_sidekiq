@@ -1,0 +1,17 @@
+FROM ruby:2.5.1
+MAINTAINER ota42y@gmail.com
+
+ENV APP_ROOT /var/www/app
+
+WORKDIR $APP_ROOT
+EXPOSE 3000
+
+RUN apt-get update && apt-get install -y nodejs postgresql-client
+
+COPY Gemfile $APP_ROOT
+COPY Gemfile.lock $APP_ROOT
+RUN bundle install
+
+COPY . $APP_ROOT
+
+CMD ["bundle", "exec", "sidekiq", "-q", "default", "event"]

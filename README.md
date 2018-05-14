@@ -26,12 +26,29 @@ Create Github OAuth App
 https://github.com/settings/developers 
 
 ```bash
-export GITHUB_CLIENT_ID=xxx
-export GITHUB_CLIENT_SECRET=yyy
-export GITHUB_ACCESS_TOKEN=zzz
-
-./bin/rails s
+cp .env.example .env
+docker-compose up
 ```
+
+## create database user
+connect to database
+
+psql -h localhost -p 15432 -U postgres
+create role gemicoma with createdb login password 'gemicoma';
+
+## build docker
+docker-compose build
+docker-compose up
+docker-compose run app sh -c "cd /var/www/app && ./bin/rake db:create db:migrate"
+
+---login user---
+
+docker exec -it gemicoma_app_1 bash
+rails c
+
+# create admin user 
+User.first.create_admin
+
 
 # import rubygems dump
 
@@ -50,10 +67,3 @@ cd ../../
 
 ```
 
-# init production env
-
-## create user
-connect to database
-
-psql -h localhost -p 15432 -U postgres
-create role gemicoma with createdb login password 'gemicoma';
