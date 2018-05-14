@@ -40,6 +40,7 @@ describe Github::Users::RepositoriesController, type: :request do
 
         expect(response.status).to eq 200
         expect(response.body).to include('5.2.0')
+        expect(response.body).to include(revision.created_at.rfc3339)
       end
     end
 
