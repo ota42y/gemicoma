@@ -4,8 +4,8 @@
 #
 #  id                       :bigint(8)        not null, primary key
 #  dump_rubygems_rubygem_id :bigint(8)        not null
-#  number                   :string(255)      not null
-#  platform                 :string(255)      not null
+#  number                   :string           not null
+#  platform                 :string           not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #

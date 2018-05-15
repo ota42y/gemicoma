@@ -5,8 +5,8 @@
 #  id              :bigint(8)        not null, primary key
 #  revision_id     :bigint(8)        not null
 #  dependency_type :integer          not null
-#  source_filepath :string(255)      not null
-#  body            :text(65535)      not null
+#  source_filepath :string           not null
+#  body            :text             not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

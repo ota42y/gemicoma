@@ -4,8 +4,8 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  github_user_id :bigint(8)        not null
-#  repository     :string(255)      not null
-#  branch         :string(255)      not null
+#  repository     :string           not null
+#  branch         :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

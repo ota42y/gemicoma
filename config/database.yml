@@ -10,12 +10,13 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("GEMICOMA_DATABASE_USERNAME") { 'root' } %>
-  password: <%= ENV.fetch("GEMICOMA_DATABASE_PASSWORD") { 'root' } %>
-  socket: /tmp/mysql.sock
+  username: <%= ENV.fetch("GEMICOMA_DATABASE_USERNAME") { 'postgres' } %>
+  password: <%= ENV.fetch("GEMICOMA_DATABASE_PASSWORD") { '' } %>
+  host: <%= ENV.fetch("GEMICOMA_DATABASE_HOST") { '127.0.0.1' } %>
+  port: <%= ENV.fetch("GEMICOMA_DATABASE_PORT") { 15432 } %>
 
 development:
   <<: *default

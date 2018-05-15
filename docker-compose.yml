@@ -1,6 +1,33 @@
 version: '3'
 services:
+  app:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: dockerfile_app
+    volumes:
+      - gemicoma_vol:/vender/bundle
+    ports:
+      - 13000:3000
+    working_dir: /var/www/app
+  sidekiq:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: dockerfile_sidekiq
+    volumes:
+      - gemicoma_vol:/vender/bundle
+    working_dir: /var/www/app
   redis:
     image: redis
     ports:
       - 16379:6379
+  db:
+    image: postgres
+    volumes:
+      - app_database_vol:/var/lib/postgresql/data
+    ports:
+      - 15432:5432
+volumes:
+  app_database_vol:
+  gemicoma_vol:

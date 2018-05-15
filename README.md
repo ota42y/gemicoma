@@ -6,6 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+2.5.1
 
 * System dependencies
 
@@ -19,23 +20,55 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+# Development Setup
 
-## Setup
-Create Github OAuth App  
+## env file
+`cp .env.example .env`
+and write tokens (see below)
+
+### create Github OAuth App
+Create Github OAuth App in this page.  
 https://github.com/settings/developers 
 
-```bash
-export GITHUB_CLIENT_ID=xxx
-export GITHUB_CLIENT_SECRET=yyy
-export GITHUB_ACCESS_TOKEN=zzz
+And set GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET
 
-./bin/rails s
+### GITHUB_ACCESS_TOKEN
+create github GITHUB_ACCESS_TOKEN
+this token can read repository. 
+
+## build docker
+docker-compose build
+docker-compose up
+
+## Setup Database
+Connect to database and create user.
+(We use localhost:15432 by default, docker-compose provide database by this port. )
+
+```
+psql -h localhost -p 15432 -U postgres
+create role gemicoma with createdb login password 'gemicoma';
+
+docker-compose run app sh -c "cd /var/www/app && ./bin/rake db:create db:migrate"
 ```
 
-# import rubygems dump
+## Setup Admin
+First, access to application and login by github account. 
+http://localhost:13000/
 
-## install postgres container and clone rubygems docker
+And create admin user by rails console
+
+```
+docker exec -it gemicoma_app_1 bash
+rails c
+
+# create admin user 
+User.first.create_admin
+```
+
+## import rubygems dump
+We need rubygems dump data, so please execute this command.
+
+### install postgres container and clone rubygems docker
 
 ```bash
 # other session
@@ -43,9 +76,9 @@ cd scripts/rubygems_docker
 docker-compose up
 
 cd scripts/rubygems_docker
-docker-compose run rubygems /scripts/import_ruygem_data
+docker-compose run rubygems /scripts/import_ruygem_data master
 
 cd ../../
 ./bin/rails runner scripts/import_script.rb
-
 ```
+

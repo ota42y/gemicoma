@@ -4,7 +4,7 @@
 #
 #  id                   :bigint(8)        not null, primary key
 #  github_repository_id :bigint(8)        not null
-#  gemfile_path         :string(255)      not null
+#  gemfile_path         :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #

@@ -6,6 +6,7 @@
 
     <h1>Commit hash</h1>
     <% if @revision %>
+      <p><%= @revision.created_at.rfc3339 %></p>
       <p><%= @revision.commit_hash%></p>
     <% else %>
       <p>now checking master branch...</p>
