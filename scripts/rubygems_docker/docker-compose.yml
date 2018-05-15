@@ -6,6 +6,8 @@ services:
       - postgres_vol:/var/lib/postgresql/data
     ports:
       - 15433:5432
+    networks:
+      - gemicoma_link
   rubygems:
     build:
       context: bulid_dockerfiles
@@ -16,3 +18,7 @@ services:
 volumes:
   postgres_vol:
   rubygems_vol:
+
+networks:
+  gemicoma_link:
+    external: true

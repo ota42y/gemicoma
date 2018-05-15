@@ -30,6 +30,8 @@ services:
     working_dir: /var/www/app
     external_links:
       - rubygems_docker_postgres_1:rubygems_docker_postgres
+    networks:
+      - gemicoma_link
   redis:
     image: redis
     ports:
@@ -42,3 +44,7 @@ services:
       - 15432:5432
 volumes:
   app_database_vol:
+
+networks:
+  gemicoma_link:
+    external: true
