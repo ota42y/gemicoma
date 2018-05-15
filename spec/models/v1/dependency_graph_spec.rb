@@ -29,6 +29,14 @@ describe ::V1::DependencyGraph do
     expect(graph.dependencies[2].name).to eq 'no_platform'
     expect(graph.dependencies[2].version).to eq '1.0.0'
     expect(graph.dependencies[2].new_version).to eq '-'
+    expect(graph.health_rate.floor(4)).to eq 0.6666
+
+    dependency_file = build(:revision_dependency_file, :gemfile_lock)
+    dependency_file.revision_ruby_specifications.build(name: 'rails', version: '5.2.0', platform: 'ruby')
+    dependency_file.revision_ruby_specifications.build(name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
+    dependency_file.revision_ruby_specifications.build(name: 'no_platform', version: '1.0.0', platform: 'none')
+    graph = ::V1::DependencyGraph.new(dependency_file)
+    expect(graph.health_rate).to eq 1.0
   end
 
   it 'when no data' do
