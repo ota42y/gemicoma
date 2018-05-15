@@ -11,6 +11,8 @@ services:
       - 13000:3000
     working_dir: /var/www/app
     command: ./bin/rails server -b 0.0.0.0
+    networks:
+      - gemicoma_link
   sidekiq:
     env_file: .env
     build:
@@ -20,6 +22,8 @@ services:
       - $PWD:/var/www/app
     working_dir: /var/www/app
     command: bundle exec sidekiq -q default event
+    networks:
+      - gemicoma_link
   batch:
     env_file: .env
     build:
@@ -34,12 +38,16 @@ services:
     image: redis
     ports:
       - 16379:6379
+    networks:
+      - gemicoma_link
   db:
     image: postgres
     volumes:
       - app_database_vol:/var/lib/postgresql/data
     ports:
       - 15432:5432
+    networks:
+      - gemicoma_link
 volumes:
   app_database_vol:
 
