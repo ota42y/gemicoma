@@ -3,7 +3,7 @@ require 'pg'
 dbname = ENV['RUBYGEMS_PG_DATABASE_DBNAME']  || 'gemcutter_development'
 user = ENV['RUBYGEMS_PG_DATABASE_USER'] || 'postgres'
 port = ENV['RUBYGEMS_PG_DATABASE_PORT'] || 15433
-hostaddr = ENV['RUBYGEMS_PG_DATABASE_HOSTADDR'] || '127.0.0.1'
+hostaddr = ENV['RUBYGEMS_PG_DATABASE_HOSTADDR'] || 'rubygems_docker_postgres'
 
 # need select * from xxx WHERE .....
 # or select * from xxx WHERE xxx yyy AND .....

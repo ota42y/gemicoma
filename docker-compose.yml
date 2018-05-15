@@ -6,18 +6,30 @@ services:
       context: .
       dockerfile: dockerfile_app
     volumes:
-      - gemicoma_vol:/vender/bundle
+      - $PWD:/var/www/app
     ports:
       - 13000:3000
     working_dir: /var/www/app
+    command: ./bin/rails server -b 0.0.0.0
   sidekiq:
     env_file: .env
     build:
       context: .
-      dockerfile: dockerfile_sidekiq
+      dockerfile: dockerfile_app
     volumes:
-      - gemicoma_vol:/vender/bundle
+      - $PWD:/var/www/app
     working_dir: /var/www/app
+    command: bundle exec sidekiq -q default event
+  batch:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: dockerfile_app
+    volumes:
+      - $PWD:/var/www/app
+    working_dir: /var/www/app
+    external_links:
+      - rubygems_docker_postgres_1:rubygems_docker_postgres
   redis:
     image: redis
     ports:
@@ -30,4 +42,3 @@ services:
       - 15432:5432
 volumes:
   app_database_vol:
-  gemicoma_vol:
