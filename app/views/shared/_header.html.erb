@@ -5,6 +5,10 @@
         <%= link_to 'Gemicoma', '/', class: 'navbar-brand' %>
       </div>
       <div class="nav navbar-form navbar-right">
+        <% if current_user&.admin %>
+          <%= link_to 'New Repository', new_admin_github_repository_path %>
+          /
+        <% end  %>
         <% if logged_in? %>
           <%= link_to 'Sign out', '/logout' %>
         <% else %>

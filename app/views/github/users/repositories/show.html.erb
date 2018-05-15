@@ -4,6 +4,10 @@
     <h1>Github repository</h1>
     <p><%= @repository.github_path %></p>
 
+    <%= form_with url: github_user_repository_update_jobs_path(user_id: @repository.github_user.name, repository_id: @repository.repository) do |form| %>
+      <%= form.submit 'Update', class: 'btn btn-danger' %>
+    <% end %>
+
     <h1>Commit hash</h1>
     <% if @revision %>
       <p><%= @revision.created_at.rfc3339 %></p>

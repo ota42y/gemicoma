@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   namespace :github do
     resources :users, only: [:show] do
       scope module: :users do
-        resources :repositories, only: [:show]
+        resources :repositories, only: [:show] do
+          scope module: :repositories do
+            resource :update_jobs, only: [:create]
+          end
+        end
       end
     end
   end
