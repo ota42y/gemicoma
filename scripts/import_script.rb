@@ -3,7 +3,7 @@ require 'pg'
 dbname = ENV['RUBYGEMS_PG_DATABASE_DBNAME']  || 'gemcutter_development'
 user = ENV['RUBYGEMS_PG_DATABASE_USER'] || 'postgres'
 port = ENV['RUBYGEMS_PG_DATABASE_PORT'] || 5432
-hostaddr = ENV['RUBYGEMS_PG_DATABASE_HOSTADDR'] || 'rubygems_docker_postgres'
+hostname = ENV['RUBYGEMS_PG_DATABASE_HOSTNAME'] || 'postgres'
 
 # need select * from xxx WHERE .....
 # or select * from xxx WHERE xxx yyy AND .....
@@ -56,7 +56,7 @@ def import_versions(conn, pg_rubygem_id_to_name, name_to_mysql_rubygem)
 end
 
 # Output a table of current connections to the DB
-conn = PG.connect(dbname: dbname, user: user, port: port, hostaddr: hostaddr)
+conn = PG.connect(dbname: dbname, user: user, port: port, host: hostname)
 
 count = 0
 find_in_batches(conn, 'SELECT * FROM public.rubygems', nil, 0, 500) do |result|

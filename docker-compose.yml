@@ -28,8 +28,6 @@ services:
     volumes:
       - $PWD:/var/www/app
     working_dir: /var/www/app
-    external_links:
-      - rubygems_docker_postgres_1:rubygems_docker_postgres
     networks:
       - gemicoma_link
   redis:
