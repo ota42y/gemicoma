@@ -25,6 +25,9 @@ describe HomeController, type: :request do
 
       expect(response.status).to eq 200
       expect(response.body).to include(revision.repository.github_path)
+
+      graph = ::V1::DependencyGraph.new(dependency_file)
+      expect(response.body).to include((graph.health_rate * 100.0).floor(2).to_s)
     end
   end
 end

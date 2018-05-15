@@ -12,6 +12,13 @@
       <p>now checking master branch...</p>
     <% end %>
 
+    <h1>Health Rate</h1>
+    <% if @revision&.done? %>
+      <p><%= (@dependency_graph.health_rate * 100.0).floor(2).to_s %>%</p>
+    <% else %>
+      <p>fetching data...please wait</p>
+    <% end %>
+
     <h1>Dependency Graph</h1>
     <% if @revision&.done? %>
       <%= render partial: 'dependency', dependency_graph: @dependency_graph %>

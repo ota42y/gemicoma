@@ -1,6 +1,6 @@
 require 'pg'
 
-dbname = ENV['RUBYGEMS_PG_DATABASE_DBNAME']  || 'gemcutter_development'
+dbname = ENV['RUBYGEMS_PG_DATABASE_DBNAME'] || 'gemcutter_development'
 user = ENV['RUBYGEMS_PG_DATABASE_USER'] || 'postgres'
 port = ENV['RUBYGEMS_PG_DATABASE_PORT'] || 5432
 hostname = ENV['RUBYGEMS_PG_DATABASE_HOSTNAME'] || 'postgres'
@@ -76,6 +76,6 @@ find_in_batches(conn, 'SELECT * FROM public.rubygems', nil, 0, 500) do |result|
 
   import_versions(conn, pg_rubygem_id_to_name, name_to_mysql_rubygem)
 
-  last_id = pg_rubygem_id_to_name.keys.sort.last
+  last_id = pg_rubygem_id_to_name.keys.max
   last_id.zero? ? nil : last_id
 end

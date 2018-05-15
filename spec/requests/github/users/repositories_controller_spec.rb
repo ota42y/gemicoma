@@ -41,6 +41,9 @@ describe Github::Users::RepositoriesController, type: :request do
         expect(response.status).to eq 200
         expect(response.body).to include('5.2.0')
         expect(response.body).to include(revision.created_at.rfc3339)
+
+        graph = ::V1::DependencyGraph.new(dependency_file)
+        expect(response.body).to include((graph.health_rate * 100.0).floor(2).to_s)
       end
     end
 

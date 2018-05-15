@@ -11,6 +11,10 @@ class V1::DependencyGraph
     @dependencies ||= load_dependencies
   end
 
+  def health_rate
+    @health_rate ||= dependencies.count { |d| !d.exist_newer? } / dependencies.count.to_f
+  end
+
   private
 
     def load_dependencies
@@ -36,7 +40,7 @@ class V1::DependencyGraph
       return ::V1::GemVersionInfo.create_unknown(spec) unless gem
       platform_versions = gem.dump_rubygems_versions.select { |v| v.platform == spec.platform }
 
-      newest_version = platform_versions.map { |v| ::Gem::Version.create(v.number) }.sort.last
+      newest_version = platform_versions.map { |v| ::Gem::Version.create(v.number) }.max
       return ::V1::GemVersionInfo.create_unknown(spec) unless newest_version
 
       ::V1::GemVersionInfo.new(spec, newest_version.to_s)
