@@ -60,6 +60,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'factory_bot_rails'
+  gem 'rspec-parameterized'
   gem 'webmock'
 end
 

@@ -4,11 +4,24 @@ describe Github::Users::RepositoriesController, type: :request do
   describe '#show' do
     subject { get url }
 
+    before { stub_request(:get, "#{::V1::RubygemsSpecification::DEFAULT_RUBYGEM_URI}specs.4.8.gz").to_return(body: gz_body) }
+
+    let(:gz_body) { Gem::Util.gzip(Marshal.dump(gems)) }
+    let(:gems) { [] }
+
     let(:url) { "/github/users/#{github_user}/repositories/#{repository_name}" }
 
     context 'when correct params' do
       let(:github_user) { 'ota42y' }
       let(:repository_name) { 'test' }
+
+      let(:gems) do
+        [
+          ['rails', Gem::Version.create('5.1.0'), 'ruby'],
+          ['rails', Gem::Version.create('5.2.0'), 'ruby'],
+          ['no_platform', Gem::Version.create('5.1.0'), 'ruby'],
+        ]
+      end
 
       it do
         user = ::Github::User.find_or_create_by!(name: github_user)
@@ -29,13 +42,6 @@ describe Github::Users::RepositoriesController, type: :request do
         dependency_file.revision_ruby_specifications.create!(name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
         dependency_file.revision_ruby_specifications.create!(name: 'no_platform', version: '1.0.0', platform: 'none')
 
-        gem = ::Dump::Rubygems::Rubygem.create!(name: 'rails')
-        ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: gem, number: '5.1.0', platform: 'ruby')
-        ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: gem, number: '5.2.0', platform: 'ruby')
-
-        no_platform = ::Dump::Rubygems::Rubygem.create!(name: 'no_platform')
-        ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: no_platform, number: '5.1.0', platform: 'ruby')
-
         subject
 
         expect(response.status).to eq 200
@@ -44,8 +50,7 @@ describe Github::Users::RepositoriesController, type: :request do
         expect(response.body).to include('btn-danger')
         expect(response.body).to include("/github/users/#{user.name}/repositories/#{repository.repository}/update_job")
 
-        graph = ::V1::DependencyGraph.new(dependency_file)
-        expect(response.body).to include((graph.health_rate * 100.0).floor(2).to_s)
+        expect(response.body).to include((0.6666 * 100.0).floor(2).to_s)
       end
     end
 
