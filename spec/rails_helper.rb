@@ -67,5 +67,6 @@ RSpec.configure do |config|
 
   config.before do
     github_logout
+    ::V1::RubygemsLoader.instance_variable_set(:@cache, {})
   end
 end

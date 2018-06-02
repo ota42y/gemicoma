@@ -6,10 +6,11 @@ describe ::V1::RubygemsSpecification do
   let(:gz_body) { Gem::Util.gzip(Marshal.dump(gems)) }
   let(:gems) { [['rails', Gem::Version.create('6.0'), 'ruby']] }
 
-  let(:uri) { ::V1::RubygemsSpecification::DEFAULT_RUBYGEM_URI }
+  let(:uri) { ::V1::RubygemsLoader::DEFAULT_RUBYGEM_URI }
+  let(:specification) { ::V1::RubygemsSpecification.new(uri) }
 
   describe 'all_specs' do
-    subject { ::V1::RubygemsSpecification.default_rubygem.all_specs }
+    subject { specification.all_specs }
 
     context 'correct data' do
       it do
@@ -19,7 +20,7 @@ describe ::V1::RubygemsSpecification do
   end
 
   describe 'specs' do
-    subject { ::V1::RubygemsSpecification.default_rubygem.specs }
+    subject { specification.specs }
 
     let(:gems) do
       [
@@ -42,7 +43,7 @@ describe ::V1::RubygemsSpecification do
   end
 
   describe 'latest_spec' do
-    subject { ::V1::RubygemsSpecification.default_rubygem.newest_version(name, platform) }
+    subject { specification.newest_version(name, platform) }
 
     let(:gems) do
       [

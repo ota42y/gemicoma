@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def index
     @repositories = ::Github::Repository.includes(:github_user, revisions: { revision_dependency_files: :revision_ruby_specifications }).all
 
-    rubygem_specification = V1::RubygemsSpecification.default_rubygem
+    rubygem_specification = V1::RubygemsLoader.default_rubygems
     revision_dict = @repositories.map { |r| [r, r.revisions.sort_by(&:created_at).reverse.first] }.to_h
 
     dependency = revision_dict.map do |repo, r|

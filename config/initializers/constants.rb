@@ -4,4 +4,9 @@ module Constants
     HOST = ENV['CONSTANTS_REDIS_HOST'].presence || '127.0.0.1'
     PORT = ENV['CONSTANTS_REDIS_PORT'].blank? ? 16379 : ENV['CONSTANTS_REDIS_PORT'].to_i
   end
+
+  module RUBYGEMS
+    USE_CACHE = true
+    CACHE_TIME = 1.day
+  end
 end

@@ -9,13 +9,13 @@ describe ::V1::DependencyGraph do
     ]
   end
   let(:specification) do
-    specification = V1::RubygemsSpecification.default_rubygem
+    specification = V1::RubygemsLoader.default_rubygems
     specification.instance_variable_set(:@all_specs, gems)
     specification
   end
 
   let(:empty_specification) do
-    specification = V1::RubygemsSpecification.default_rubygem
+    specification = V1::RubygemsLoader.default_rubygems
     specification.instance_variable_set(:@all_specs, [])
     specification
   end
