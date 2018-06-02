@@ -1,14 +1,5 @@
 module V1
   class RubygemsSpecification
-    DEFAULT_RUBYGEM_URI = 'https://rubygems.org/'.freeze
-
-    class << self
-      # @return V1::RubygemsSpecification
-      def default_rubygem
-        new(DEFAULT_RUBYGEM_URI)
-      end
-    end
-
     def initialize(uri)
       @uri = uri
     end

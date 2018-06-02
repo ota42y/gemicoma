@@ -4,7 +4,7 @@ describe HomeController, type: :request do
   describe 'index' do
     subject { get url }
 
-    before { stub_request(:get, "#{::V1::RubygemsSpecification::DEFAULT_RUBYGEM_URI}specs.4.8.gz").to_return(body: gz_body) }
+    before { stub_request(:get, "#{::V1::RubygemsLoader::DEFAULT_RUBYGEM_URI}specs.4.8.gz").to_return(body: gz_body) }
 
     let(:gz_body) { Gem::Util.gzip(Marshal.dump(gems)) }
     let(:gems) do

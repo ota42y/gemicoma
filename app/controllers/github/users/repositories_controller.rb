@@ -10,7 +10,7 @@ class Github::Users::RepositoriesController < ApplicationController
       # @type [Revision::DependencyFile] dependency
       dependency = @revision.revision_dependency_files.first
 
-      rubygem_specification = V1::RubygemsSpecification.default_rubygem
+      rubygem_specification = V1::RubygemsLoader.default_rubygems
       @dependency_graph = ::V1::DependencyGraph.new(dependency, rubygem_specification)
     end
 
