@@ -24,16 +24,6 @@ services:
     command: bundle exec sidekiq -q default event
     networks:
       - gemicoma_link
-  batch:
-    env_file: .env
-    build:
-      context: .
-      dockerfile: dockerfile_app
-    volumes:
-      - $PWD:/var/www/app
-    working_dir: /var/www/app
-    networks:
-      - gemicoma_link
   redis:
     image: redis
     ports:

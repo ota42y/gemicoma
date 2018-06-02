@@ -41,7 +41,6 @@ this token can read repository.
 docker network create gemicoma_link
 docker-compose build
 docker-compose up
-(gemicoma_batch will exit but no problem)
 ```
 
 ## Setup Database
@@ -66,24 +65,6 @@ docker-compose run app rails c
 
 # create admin user 
 User.first.create_admin
-```
-
-## import rubygems dump
-We need rubygems dump data, so please execute this command.
-
-### install postgres container and clone rubygems docker
-
-```bash
-# other session
-cd scripts/rubygems_docker
-docker-compose up
-(rubygems_docker_rubygems will exit but no problem)
-
-cd scripts/rubygems_docker
-docker-compose run rubygems /scripts/import_ruygem_data master
-
-cd ../../
-docker-compose run batch ./bin/rails runner scripts/import_script.rb
 ```
 
 ## add repository
