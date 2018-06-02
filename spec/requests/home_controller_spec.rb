@@ -4,16 +4,22 @@ describe HomeController, type: :request do
   describe 'index' do
     subject { get url }
 
+    before { stub_request(:get, "#{::V1::RubygemsSpecification::DEFAULT_RUBYGEM_URI}specs.4.8.gz").to_return(body: gz_body) }
+
+    let(:gz_body) { Gem::Util.gzip(Marshal.dump(gems)) }
+    let(:gems) do
+      [
+        ['rails', Gem::Version.create('5.1.0'), 'ruby'],
+        ['rails', Gem::Version.create('5.2.0'), 'ruby'],
+        ['no_platform', Gem::Version.create('5.1.0'), 'ruby'],
+      ]
+    end
+
     let(:url) { '/' }
 
+    let(:health_rate) { (2.0 / 3) * 100.0 }
+
     it do
-      gem = ::Dump::Rubygems::Rubygem.create!(name: 'rails')
-      ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: gem, number: '5.1.0', platform: 'ruby')
-      ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: gem, number: '5.2.0', platform: 'ruby')
-
-      no_platform = ::Dump::Rubygems::Rubygem.create!(name: 'no_platform')
-      ::Dump::Rubygems::Version.create!(dump_rubygems_rubygem: no_platform, number: '5.1.0', platform: 'ruby')
-
       revision = build(:revision, repository: create(:github_repository), status: :downloaded)
       dependency_file = build(:revision_dependency_file, :gemfile_lock, revision: revision)
       dependency_file.revision_ruby_specifications.build(name: 'rails', version: '5.0.0', platform: 'ruby')
@@ -25,9 +31,7 @@ describe HomeController, type: :request do
 
       expect(response.status).to eq 200
       expect(response.body).to include(revision.repository.github_path)
-
-      graph = ::V1::DependencyGraph.new(dependency_file)
-      expect(response.body).to include((graph.health_rate * 100.0).floor(2).to_s)
+      expect(response.body).to include(health_rate.floor(2).to_s)
     end
   end
 end
