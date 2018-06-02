@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_09_141849) do
+ActiveRecord::Schema.define(version: 2018_06_02_075639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,23 +20,6 @@ ActiveRecord::Schema.define(version: 2018_05_09_141849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_admins_on_user_id", unique: true
-  end
-
-  create_table "dump_rubygems_rubygems", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_dump_rubygems_rubygems_on_name"
-  end
-
-  create_table "dump_rubygems_versions", force: :cascade do |t|
-    t.bigint "dump_rubygems_rubygem_id", null: false
-    t.string "number", null: false
-    t.string "platform", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dump_rubygems_rubygem_id", "number", "platform"], name: "rubygem_id_number_platform_unique_index", unique: true
   end
 
   create_table "github_auths", force: :cascade do |t|
@@ -111,7 +94,6 @@ ActiveRecord::Schema.define(version: 2018_05_09_141849) do
   end
 
   add_foreign_key "admins", "users"
-  add_foreign_key "dump_rubygems_versions", "dump_rubygems_rubygems"
   add_foreign_key "github_auths", "users"
   add_foreign_key "github_repositories", "github_users"
   add_foreign_key "github_ruby_gem_infos", "github_repositories"
