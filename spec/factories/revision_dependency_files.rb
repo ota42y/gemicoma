@@ -22,9 +22,9 @@
 FactoryBot.define do
   factory :revision_dependency_file, class: 'Revision::DependencyFile' do
     trait :gemfile_lock do
-      dependency_type :gemfile_lock
-      source_filepath './'
-      body <<~GEMFILE
+      dependency_type { :gemfile_lock }
+      source_filepath { './' }
+      body { <<~GEMFILE }
         GEM
           remote: https://rubygems.org/
           specs:
