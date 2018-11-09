@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.3
 MAINTAINER ota42y@gmail.com
 
 EXPOSE 3000
