@@ -19,6 +19,6 @@
 
 FactoryBot.define do
   factory :github_ruby_gem_info, class: 'Github::Ruby::GemInfo' do
-    gemfile_path './'
+    gemfile_path { './' }
   end
 end

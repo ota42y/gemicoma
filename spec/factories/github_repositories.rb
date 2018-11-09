@@ -23,6 +23,6 @@ FactoryBot.define do
     github_user
 
     sequence(:repository, &:to_s)
-    branch 'master'
+    branch { 'master' }
   end
 end
