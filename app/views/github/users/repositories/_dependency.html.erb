@@ -10,7 +10,9 @@
   <tbody>
   <% @dependency_graph.dependencies.each do |gem_version_info| %>
     <tr>
-      <td><%= gem_version_info.name %></td>
+      <td>
+        <%= link_to gem_version_info.name, ruby_gem_path(name: gem_version_info.name) %>
+      </td>
       <td><%= gem_version_info.version %></td>
       <td><%= gem_version_info.new_version %></td>
     </tr>
