@@ -11,6 +11,7 @@ class User < ApplicationRecord
   class << self
     def find_with_omniauth(provider:, uid:)
       return ::Github::Auth.find_by(uid: uid)&.user if provider == 'github'
+
       nil
     end
 

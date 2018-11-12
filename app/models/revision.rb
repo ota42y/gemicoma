@@ -20,7 +20,12 @@
 class Revision < ApplicationRecord
   belongs_to :repository, polymorphic: true
 
+  has_one :revision_latest, class_name: 'Revision::Latest', dependent: :destroy, inverse_of: :revision
   has_many :revision_dependency_files, class_name: 'Revision::DependencyFile', dependent: :destroy, inverse_of: :revision
 
   enum status: { initialized: 0, downloaded: 1, done: 2 }
+
+  def update_revision
+    repository.update_revision(self)
+  end
 end

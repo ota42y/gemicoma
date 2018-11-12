@@ -29,6 +29,15 @@ describe V1::Analyzer::Revision, type: :model do
 
         expect(revision.done?).to eq true
         expect(dependency_file.revision_ruby_specifications.count).to eq 2
+        expect(revision.repository.revision_latest.revision_id).to eq revision.id
+      end
+
+      it 'overwrite revision' do
+        old_revision = build(:revision, repository: revision.repository, status: :done)
+        revision.repository.update_revision(old_revision)
+
+        expect(subject).to eq true
+        expect(revision.repository.revision_latest.revision_id).to eq revision.id
       end
     end
 

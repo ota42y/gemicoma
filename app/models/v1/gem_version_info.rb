@@ -16,6 +16,7 @@ module V1
 
     def exist_newer?
       return false if new_version == '-'
+
       ::Gem::Version.create(new_version) > ::Gem::Version.create(version) # rubocop:disable Rails/SaveBang
     end
   end

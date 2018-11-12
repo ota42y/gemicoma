@@ -27,9 +27,15 @@ class Github::Repository < ApplicationRecord
                                  foreign_key: :github_repository_id
 
   has_many :revisions, dependent: :destroy, inverse_of: :repository, as: :repository
+  has_one :revision_latest, class_name: 'Revision::Latest', dependent: :destroy, inverse_of: :repository, as: :repository
 
   # rails/arel
   def github_path
     "#{github_user.name}/#{repository}"
+  end
+
+  def update_revision(revision)
+    build_revision_latest unless revision_latest
+    revision_latest.update_revision(revision)
   end
 end
