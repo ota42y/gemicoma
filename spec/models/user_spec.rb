@@ -34,11 +34,11 @@ describe User do
   describe 'create_with_omniauth' do
     subject { User.create_with_omniauth(auth) }
 
-    xcontext 'unknown provider' do
-      let(:auth) { { provider: 'unknown' } }
-
-      it { expect { subject }.to raise_error }
-    end
+    #     xcontext 'unknown provider' do
+    #       let(:auth) { { provider: 'unknown' } }
+    #
+    #       # it { expect { subject }.to raise_error }
+    #     end
 
     context 'github' do
       context 'correct' do

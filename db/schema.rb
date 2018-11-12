@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_075639) do
+ActiveRecord::Schema.define(version: 2018_11_12_085226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 2018_06_02_075639) do
     t.index ["revision_id"], name: "index_revision_dependency_files_on_revision_id"
   end
 
+  create_table "revision_latests", force: :cascade do |t|
+    t.integer "repository_id", null: false
+    t.string "repository_type", null: false
+    t.bigint "revision_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "repository_type"], name: "repository_unique", unique: true
+    t.index ["revision_id"], name: "index_revision_latests_on_revision_id"
+  end
+
   create_table "revision_ruby_specifications", force: :cascade do |t|
     t.bigint "revision_dependency_file_id", null: false
     t.string "name", null: false
@@ -98,4 +108,5 @@ ActiveRecord::Schema.define(version: 2018_06_02_075639) do
   add_foreign_key "github_repositories", "github_users"
   add_foreign_key "github_ruby_gem_infos", "github_repositories"
   add_foreign_key "revision_dependency_files", "revisions"
+  add_foreign_key "revision_latests", "revisions"
 end

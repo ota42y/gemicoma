@@ -17,6 +17,6 @@ shared_context 'shared_gemfile_text' do
       BUNDLED WITH
          1.16.1
 
-GEMFILE
+    GEMFILE
   end
 end

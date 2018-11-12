@@ -15,7 +15,10 @@ module V1
             end
           end
 
-          revision.done!
+          ActiveRecord::Base.transaction do
+            revision.done!
+            revision.update_revision
+          end
 
           true
         end
