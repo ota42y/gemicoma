@@ -12,13 +12,13 @@
       </thead>
 
       <tbody>
-      <% @repositories.each do |repo| %>
+      <% @repo_and_dependency.each do |repo, dependency| %>
           <tr>
             <td>
               <%= link_to repo.github_path, github_user_repository_path(user_id: repo.github_user.name, id: repo.repository) %>
             </td>
             <td>
-              <%= (@repo_to_dependency[repo].health_rate * 100.0).floor(2) %>%
+              <%= (dependency.health_rate * 100.0).floor(2) %>%
             </td>
           </tr>
       <% end %>
