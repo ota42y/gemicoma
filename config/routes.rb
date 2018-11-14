@@ -23,4 +23,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :ruby do
+    resources :gems, only: [:show], param: :name
+  end
 end
