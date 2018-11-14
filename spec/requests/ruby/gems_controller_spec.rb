@@ -5,7 +5,7 @@ describe Ruby::GemsController, type: :request do
     subject { get url }
 
     let(:url) { "/ruby/gems/#{gem_name}" }
-    let(:gem_name) { "rails" }
+    let(:gem_name) { 'rails' }
 
     context 'when not login' do
       it do
@@ -15,7 +15,6 @@ describe Ruby::GemsController, type: :request do
     end
 
     context 'when log in' do
-
       let(:github_user_name) { github_user.name }
       let(:github_user) { github_repository.github_user }
       let(:github_repository) { create(:github_repository) }
@@ -56,4 +55,3 @@ describe Ruby::GemsController, type: :request do
     end
   end
 end
-
