@@ -8,6 +8,6 @@ class Github::UsersController < ApplicationController
   private
 
     def need_login!
-      raise ActiveRecord::RecordNotFound unless logged_in?
+      #raise ActiveRecord::RecordNotFound unless logged_in?
     end
 end
