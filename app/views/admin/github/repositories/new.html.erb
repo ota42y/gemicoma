@@ -13,10 +13,13 @@
       </div>
 
       <div class="row">
-        <%= form.label :gemfile_path, class: "col-sm-2" %>
         <%= form.fields(:bundle_files) do |fields| %>
           <%= fields.fields(:rubygem) do |rubygem| %>
-            <%= rubygem.text_field :gemfile_path, value: './' %>
+            <%= form.label :gemfile_path, class: "col-sm-2" %>
+            <%= rubygem.text_field :gemfile_path, value: './' %> <br />
+
+            <%= form.label :ruby_versions_path, class: "col-sm-2" %>
+            <%= rubygem.text_field :ruby_versions_path, value: './' %>
           <% end %>
         <% end %>
       </div>

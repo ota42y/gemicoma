@@ -40,7 +40,15 @@ describe Admin::Github::RepositoriesController, type: :request do
         }
       end
 
-      let(:bundle_files) { { rubygem: { gemfile_path: '' } } }
+      let(:ruby_version_path) { { rubygem: { ruby_version_path: '' } } }
+      let(:bundle_files) do
+        {
+          rubygem: {
+            gemfile_path: '',
+            ruby_version_path: './',
+          },
+        }
+      end
       let(:github_user) { 'ota42y' }
       let(:repository) { 'test' }
       let(:github_repository) { "#{github_user}/#{repository}" }
@@ -68,10 +76,27 @@ describe Admin::Github::RepositoriesController, type: :request do
 
           gem_info = github_repository.github_ruby_gem_info
           expect(gem_info.gemfile_path).to eq ''
+          expect(gem_info.ruby_version_path).to eq './'
         end
 
         it 'check redirect' do
           expect(subject).to redirect_to('/github/users/ota42y/repositories/test')
+        end
+
+        it 'without ruby version path' do
+          bundle_files[:rubygem].delete :ruby_version_path
+
+          subject
+
+          expect(response.status).to eq 302
+
+          user = Github::User.find_by!(name: github_user)
+
+          # @type [Github::Repository] github_repository
+          github_repository = user.github_repositories.find_by!(repository: repository)
+
+          gem_info = github_repository.github_ruby_gem_info
+          expect(gem_info.ruby_version_path).to eq nil
         end
       end
 
