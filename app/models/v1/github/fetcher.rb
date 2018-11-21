@@ -6,7 +6,10 @@ module V1
         def execute(revision)
           return false unless revision.initialized?
 
-          ::V1::Github::GemLockFetcher.execute(revision) if revision.repository.github_ruby_gem_info
+          if revision.repository.github_ruby_gem_info
+            dependency_file = ::V1::Github::GemLockFetcher.execute(revision)
+            ::V1::Github::RubyVersionFetcher.execute(revision, dependency_file)
+          end
 
           revision.downloaded!
           true

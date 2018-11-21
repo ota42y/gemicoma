@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_013620) do
+ActiveRecord::Schema.define(version: 2018_11_21_110610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_013620) do
     t.string "gemfile_path", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ruby_version_path"
     t.index ["github_repository_id"], name: "index_github_ruby_gem_infos_on_github_repository_id", unique: true
   end
 

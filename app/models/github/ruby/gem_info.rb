@@ -7,6 +7,7 @@
 #  gemfile_path         :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  ruby_version_path    :string
 #
 # Indexes
 #
@@ -22,5 +23,9 @@ class Github::Ruby::GemInfo < ApplicationRecord
 
   def gemfile_lock_relative_path
     File.join(gemfile_path, 'Gemfile.lock')
+  end
+
+  def ruby_version_relative_path
+    ruby_version_path ? File.join(ruby_version_path, '.ruby-version') : nil
   end
 end

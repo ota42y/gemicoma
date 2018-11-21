@@ -40,7 +40,17 @@ describe V1::Analyzer::GemLock, type: :model do
         deleted_gem = dependency_file.revision_ruby_specifications.select { |n| n.name == unknown_gem.name }
         expect(deleted_gem.size).to eq 0
 
-        expect(dependency_file.revision_ruby_version.version).to eq 'ruby 2.5.3p105'
+        expect(dependency_file.revision_ruby_version.version).to eq '2.5.3'
+      end
+
+      it 'already saved version' do
+        dependency_file.create_revision_ruby_version(version: '2.5.1')
+
+        subject
+        dependency_file.save!
+        dependency_file.reload
+
+        expect(dependency_file.revision_ruby_version.version).to eq '2.5.1'
       end
     end
   end

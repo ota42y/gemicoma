@@ -29,6 +29,7 @@ class Admin::Github::RepositoriesController < Admin::BaseController
       b = repository.github_ruby_gem_info
       b ||= repository.build_github_ruby_gem_info
       b.gemfile_path = rubygem['gemfile_path']
+      b.ruby_version_path = rubygem['ruby_version_path'] if rubygem['ruby_version_path'].present?
 
       b.save! if b.changed?
       b
