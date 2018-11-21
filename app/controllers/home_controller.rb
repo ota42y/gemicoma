@@ -1,9 +1,12 @@
 class HomeController < ApplicationController
   def index
-
     rubygem_specification = V1::RubygemsLoader.default_rubygems
 
-    repositories = ::Revision::Latest.includes(repository: [:github_user, revisions: { revision_dependency_files: :revision_ruby_specifications }]).all.map(&:repository)
+    repositories = ::Revision::Latest.
+                     includes(repository: [:github_user, revisions: { revision_dependency_files: :revision_ruby_specifications }]).
+                     all.
+                     map(&:repository)
+
     revision_dict = repositories.map { |r| [r, r.revisions.first] }.to_h
 
     dependency = revision_dict.map do |repo, r|

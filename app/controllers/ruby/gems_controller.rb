@@ -15,7 +15,7 @@ class Ruby::GemsController < ApplicationController
       [repo, spec]
     end
 
-    @repository_gems = rg.to_h
+    @repository_gems = rg.sort { |a, b| Gem::Version.new(a[1].version) <=> Gem::Version.new(b[1].version) }.reverse
   end
 
   private

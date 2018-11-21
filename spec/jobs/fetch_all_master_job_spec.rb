@@ -13,9 +13,9 @@ describe FetchAllMasterJob, type: :model do
 
       it do
         expect { subject }.
-            to have_enqueued_job(::FetchMasterJob).with(repositories[0].id, true).
-                and have_enqueued_job(::FetchMasterJob).with(repositories[1].id, true).
-                    and have_enqueued_job(::FetchMasterJob).with(repositories[2].id, true)
+          to have_enqueued_job(::FetchMasterJob).with(repositories[0].id, true).
+               and have_enqueued_job(::FetchMasterJob).with(repositories[1].id, true).
+                     and have_enqueued_job(::FetchMasterJob).with(repositories[2].id, true)
       end
     end
   end
