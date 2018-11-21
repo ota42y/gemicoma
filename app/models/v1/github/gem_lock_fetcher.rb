@@ -3,6 +3,7 @@ module V1
     class GemLockFetcher
       class << self
         # @param [Revision] revision
+        # @return [Revision::DependencyFile]
         def execute(revision)
           self.new(revision).execute!
         end
@@ -14,6 +15,7 @@ module V1
         @repository = revision.repository
       end
 
+      # @return [Revision::DependencyFile]
       def execute!
         @revision.
           revision_dependency_files.

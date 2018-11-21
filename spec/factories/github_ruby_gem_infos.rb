@@ -21,5 +21,6 @@
 FactoryBot.define do
   factory :github_ruby_gem_info, class: 'Github::Ruby::GemInfo' do
     gemfile_path { './' }
+    ruby_version_path { './' }
   end
 end
