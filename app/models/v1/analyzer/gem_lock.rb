@@ -11,9 +11,7 @@ module V1
             dependency_file.revision_ruby_specifications.build(name: spec.name, version: spec.version, platform: spec.platform)
           end
 
-          if dependency_file.revision_ruby_version.nil? && (version = parse_ruby_version(parser.ruby_version))
-            dependency_file.build_revision_ruby_version(version: version)
-          end
+          dependency_file.build_revision_ruby_version(version: parse_ruby_version(parser.ruby_version)) if dependency_file.revision_ruby_version.nil?
         end
 
         private

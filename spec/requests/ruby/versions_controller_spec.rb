@@ -25,7 +25,7 @@ describe Ruby::VersionsController, type: :request do
       revision = create(:revision, repository: repository, status: :done)
 
       dependency_file = create(:revision_dependency_file, :gemfile_lock, revision: revision)
-      dependency_file.create_revision_ruby_version(version: 'ruby 2.5.3p105')
+      dependency_file.create_revision_ruby_version(version: '2.5.3')
 
       revision.update_revision
 
@@ -40,7 +40,7 @@ describe Ruby::VersionsController, type: :request do
       revision = create(:revision, repository: repository, status: :done)
 
       dependency_file = create(:revision_dependency_file, :gemfile_lock, revision: revision)
-      dependency_file.create_revision_ruby_version(version: 'ruby 2.5.0p105')
+      dependency_file.create_revision_ruby_version(version: '2.5.0')
 
       revision.update_revision
 
@@ -48,8 +48,8 @@ describe Ruby::VersionsController, type: :request do
 
       expect(response.status).to eq 200
       expect(response.body).to include(repository_name.to_s)
-      index_253 = response.body.index('ruby 2.5.3p105') # rubocop:disable Naming/VariableNumber
-      index_250 = response.body.index('ruby 2.5.0p105') # rubocop:disable Naming/VariableNumber
+      index_253 = response.body.index('2.5.3') # rubocop:disable Naming/VariableNumber
+      index_250 = response.body.index('2.5.0') # rubocop:disable Naming/VariableNumber
       index_none = response.body.index('---')
 
       expect(index_253).not_to eq nil
