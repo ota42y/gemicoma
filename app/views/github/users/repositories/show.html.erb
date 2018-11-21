@@ -23,6 +23,13 @@
       <p>fetching data...please wait</p>
     <% end %>
 
+    <h1>Ruby Version</h1>
+    <% if @revision&.done? %>
+      <p><%= @dependency_graph.ruby_version %></p>
+    <% else %>
+      <p>fetching data...please wait</p>
+    <% end %>
+
     <h1>Dependency Graph</h1>
     <% if @revision&.done? %>
       <%= render partial: 'dependency', dependency_graph: @dependency_graph %>

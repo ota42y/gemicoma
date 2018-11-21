@@ -17,6 +17,10 @@ class V1::DependencyGraph
     @health_rate ||= dependencies.count { |d| !d.exist_newer? } / dependencies.count.to_f
   end
 
+  def ruby_version
+    @dependency_file&.revision_ruby_version&.version
+  end
+
   private
 
     def load_dependencies
