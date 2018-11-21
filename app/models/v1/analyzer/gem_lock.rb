@@ -10,6 +10,8 @@ module V1
           parser.specs.uniq(&:name).each do |spec|
             dependency_file.revision_ruby_specifications.build(name: spec.name, version: spec.version, platform: spec.platform)
           end
+
+          dependency_file.build_revision_ruby_version(version: parser.ruby_version)
         end
       end
     end

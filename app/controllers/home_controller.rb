@@ -11,7 +11,6 @@ class HomeController < ApplicationController
       [repo, ::V1::DependencyGraph.new(r.revision_dependency_files.first, rubygem_specification)]
     end
 
-
     @repo_and_dependency = dependency.sort_by { |data| data[1].health_rate }.reverse
     render :index
   end
