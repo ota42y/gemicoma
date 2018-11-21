@@ -18,7 +18,7 @@
             <%= link_to repo.github_path, github_user_repository_path(user_id: repo.github_user.name, id: repo.repository) %>
           </td>
           <td>
-            <%= version ? version : '---' %>
+            <%= version.version.empty? ? '---' : version %>
           </td>
         </tr>
       <% end %>

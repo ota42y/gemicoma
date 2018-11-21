@@ -19,4 +19,6 @@
 
 class Revision::Ruby::Version < ApplicationRecord
   belongs_to :revision_dependency_file, class_name: 'Revision::DependencyFile', inverse_of: :revision_ruby_specifications
+
+  validates :version, format: { with: /\A\d+\.\d+\.\d+\Z/ }
 end
