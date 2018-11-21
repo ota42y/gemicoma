@@ -7,6 +7,7 @@
 #  gemfile_path         :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  ruby_version_path    :string
 #
 # Indexes
 #
