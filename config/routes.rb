@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   namespace :ruby do
     resources :gems, only: [:show], param: :name
+    resources :versions, only: [:index]
   end
 end
