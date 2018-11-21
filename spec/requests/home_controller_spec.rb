@@ -27,6 +27,8 @@ describe HomeController, type: :request do
       dependency_file.revision_ruby_specifications.build(name: 'no_platform', version: '1.0.0', platform: 'none')
       dependency_file.save!
 
+      revision.update_revision
+
       subject
 
       expect(response.status).to eq 200

@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_013620) do
 
   create_table "revision_ruby_versions", force: :cascade do |t|
     t.bigint "revision_dependency_file_id", null: false
-    t.string "version", null: false
+    t.string "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["revision_dependency_file_id"], name: "index_revision_ruby_versions_on_revision_dependency_file_id", unique: true

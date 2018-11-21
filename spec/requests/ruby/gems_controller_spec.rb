@@ -7,13 +7,6 @@ describe Ruby::GemsController, type: :request do
     let(:url) { "/ruby/gems/#{gem_name}" }
     let(:gem_name) { 'rails' }
 
-    context 'when not login' do
-      it do
-        subject
-        expect(response.status).to eq 404
-      end
-    end
-
     context 'when log in' do
       let(:github_user_name) { github_user.name }
       let(:github_user) { github_repository.github_user }
