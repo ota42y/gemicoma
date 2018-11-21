@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     namespace :github do
+      resource :all_fetch, only: [:create]
       resources :repositories, only: [:new, :create]
     end
   end

@@ -5,11 +5,18 @@
 
     <table class="table">
       <tbody>
-        <tr>
-          <td>
-            <%= link_to 'ruby_versions', ruby_versions_path %>
-          </td>
-        </tr>
+      <tr>
+        <td>
+          <%= form_with url: admin_github_all_fetch_path  do |form| %>
+            <%= form.submit 'all_fetch', class: 'p'%>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to 'ruby_versions', ruby_versions_path %>
+        </td>
+      </tr>
       </tbody>
     </table>
 
