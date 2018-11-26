@@ -34,6 +34,10 @@ class Github::Repository < ApplicationRecord
     "#{github_user.name}/#{repository}"
   end
 
+  def github_link_path
+    "https://github.com/#{github_path}"
+  end
+
   def update_revision(revision)
     build_revision_latest unless revision_latest
     revision_latest.update_revision(revision)
