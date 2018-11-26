@@ -2,7 +2,7 @@
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
     <h1>Github repository</h1>
-    <%= link_to @repository.gihtub_path, @repository.github_link_path %>
+    <%= link_to @repository.github_path, @repository.github_link_path %>
 
     <%= form_with url: github_user_repository_update_jobs_path(user_id: @repository.github_user.name, repository_id: @repository.repository) do |form| %>
       <%= form.submit 'Update', class: 'btn btn-danger' %>
