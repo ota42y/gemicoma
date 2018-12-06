@@ -58,8 +58,7 @@ GEM
     arel (9.0.0)
     ast (2.4.0)
     bindex (0.5.0)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
+    binding_ninja (0.2.2)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -93,7 +92,6 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
-    debug_inspector (0.0.3)
     diff-lcs (1.3)
     equalizer (0.0.11)
     erubi (1.7.1)
@@ -237,8 +235,8 @@ GEM
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-parameterized (0.4.0)
-      binding_of_caller
+    rspec-parameterized (0.4.1)
+      binding_ninja (>= 0.2.1)
       parser
       proc_to_ast
       rspec (>= 2.13, < 4)
@@ -310,7 +308,7 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
-    unparser (0.2.7)
+    unparser (0.4.2)
       abstract_type (~> 0.0.7)
       adamantium (~> 0.2.0)
       concord (~> 0.1.5)
