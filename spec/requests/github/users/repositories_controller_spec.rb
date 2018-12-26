@@ -41,7 +41,7 @@ describe Github::Users::RepositoriesController, type: :request do
         dependency_file.revision_ruby_specifications.create!(name: 'rails', version: '5.0.0', platform: 'ruby')
         dependency_file.revision_ruby_specifications.create!(name: 'unknown_gem', version: '1.0.0', platform: 'ruby')
         dependency_file.revision_ruby_specifications.create!(name: 'no_platform', version: '1.0.0', platform: 'none')
-        dependency_file.create_revision_ruby_version(version: 'ruby 2.5.3p105')
+        dependency_file.create_revision_ruby_version!(version: '2.5.3')
 
         subject
 
@@ -53,7 +53,7 @@ describe Github::Users::RepositoriesController, type: :request do
 
         expect(response.body).to include((0.6666 * 100.0).floor(2).to_s)
 
-        expect(response.body).to include('ruby 2.5.3p105')
+        expect(response.body).to include('2.5.3')
       end
     end
 
