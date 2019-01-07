@@ -1,4 +1,7 @@
-# README
+# Gemicoma
+[![CircleCI](https://circleci.com/gh/ota42y/gemicoma.svg?style=svg)](https://circleci.com/gh/ota42y/gemicoma)
+
+# Setup
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -6,7 +9,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-2.5.1
+2.5.3
 
 * System dependencies
 

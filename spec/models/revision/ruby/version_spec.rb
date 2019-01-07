@@ -11,8 +11,8 @@ RSpec.describe Revision::Ruby::Version, type: :model do
       it { expect(subject).to eq true }
     end
 
-    context 'invalid' do
-      let(:version) { '2.5.0a' }
+    context 'revision' do
+      let(:version) { '2.5.3p105' }
       it { expect(subject).to eq false }
     end
 
