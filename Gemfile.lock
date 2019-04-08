@@ -59,7 +59,7 @@ GEM
     ast (2.4.0)
     bindex (0.5.0)
     binding_ninja (0.2.2)
-    bootsnap (1.4.2)
+    bootsnap (1.4.3)
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
