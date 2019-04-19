@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.5.3-node
+      - image: circleci/ruby:2.6.3-node
         environment:
           RAILS_ENV: test
           GEMICOMA_DATABASE_PORT: 5432
