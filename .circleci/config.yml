@@ -21,6 +21,9 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: bundle 2.x
+          command: gem i bundler
 
       # Download and cache dependencies
       - restore_cache:

@@ -5,6 +5,8 @@ EXPOSE 3000
 
 RUN apt-get update && apt-get install -y nodejs postgresql-client
 
+RUN gem i bundler
+
 COPY Gemfile .
 COPY Gemfile.lock .
 RUN bundle install
