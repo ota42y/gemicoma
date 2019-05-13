@@ -42,4 +42,11 @@ class Github::Repository < ApplicationRecord
     build_revision_latest unless revision_latest
     revision_latest.update_revision(revision)
   end
+
+  def update_ruby_gem_info!(gemfile_path:, ruby_version_path:)
+    info = self.github_ruby_gem_info ? self.github_ruby_gem_info : self.build_github_ruby_gem_info
+    info.gemfile_path = gemfile_path
+    info.ruby_version_path = ruby_version_path if ruby_version_path
+    info.save!
+  end
 end
